@@ -2,61 +2,31 @@ export const HomeServices = [
     {
         src: '/SLIDE_01.jpg',
         heading: 'Waxing',
-        price: 3000
+        price: 249
     },
     { 
         src: '/SLIDE_02.jpg',
         heading: 'Facial' ,
-        price: 4000
+        price: 499
     },
     { 
         src: '/SLIDE_03.jpg',
         heading: 'Mannicure',
-        price: 2000 
+        price: 249 
     },
     { 
         src: '/SLIDE_04.jpg',
         heading: 'Pedicure',
-        price: 5000
+        price: 299
     },
-    {
+    { 
         src: '/SLIDE_01.jpg',
-        heading: 'Waxing',
-        price: 3000
+        heading: 'Nail Extension',
+        price: 1199
     },
     { 
         src: '/SLIDE_02.jpg',
-        heading: 'Facial' ,
-        price: 4000
-    },
-    { 
-        src: '/SLIDE_03.jpg',
-        heading: 'Mannicure',
-        price: 2000 
-    },
-    { 
-        src: '/SLIDE_04.jpg',
-        heading: 'Pedicure',
-        price: 5000
-    },
-    {
-        src: '/SLIDE_01.jpg',
-        heading: 'Waxing',
-        price: 3000
-    },
-    { 
-        src: '/SLIDE_02.jpg',
-        heading: 'Facial' ,
-        price: 4000
-    },
-    { 
-        src: '/SLIDE_03.jpg',
-        heading: 'Mannicure',
-        price: 2000 
-    },
-    { 
-        src: '/SLIDE_04.jpg',
-        heading: 'Pedicure',
-        price: 5000
+        heading: 'Bleach',
+        price: 160
     },
 ]
