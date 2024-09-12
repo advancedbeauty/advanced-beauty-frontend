@@ -1,7 +1,6 @@
 'use client';
 
 import Avatar from '@/components/ui/features/Avatar';
-import ThemeSwitcher from '@/components/ui/theme/themeSwitcher';
 import React, { useState } from 'react';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 
@@ -21,7 +20,7 @@ const Menu = () => {
       </div>
       {isOpen && (
         <div className='absolute bg-background border-2 top-12 right-0 rounded-3xl w-52'>
-          <ThemeSwitcher />
+          Hello
         </div>
       )}
     </div>
