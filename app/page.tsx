@@ -1,3 +1,4 @@
+import Footer from '@/components/footer';
 import HomeAboutSection from '@/components/home/about-section';
 import HeroSection from '@/components/home/hero-section';
 import HomeReviewSection from '@/components/home/review-section';
@@ -13,6 +14,7 @@ const page = () => {
             <HomeAboutSection />
             <HomeServiceSection />
             <HomeReviewSection />
+            <Footer />
         </main>
     );
 };

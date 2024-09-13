@@ -9,7 +9,7 @@ import { BsCart2 } from "react-icons/bs";
 
 const LowerNavbar = () => {
   return (
-    <Section className="py-2 shadow dark:shadow-gray-500/60 bg-[#111111] text-white">
+    <Section className="py-2 shadow bg-[#111111] text-white">
       <Container className="w-full flex justify-center items-center md:justify-between">
         <Logo className="" />
         <div className="hidden md:flex items-center gap-5">
