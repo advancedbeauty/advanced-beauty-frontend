@@ -1,8 +1,6 @@
-'use client';
-
 import Container from '@/components/ui/features/Container';
 import Section from '@/components/ui/features/Section';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface UpperNavbarProps {
     className?: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -12,9 +12,21 @@ import { FiArrowRight, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Servicecard from '@/components/services/service-card';
 import Link from 'next/link';
 
+const NavigationButton = ({ direction, onClick }:any) => (
+    <button
+        className="p-3 transition-colors border w-16 h-16 flex items-center justify-center text-xl duration-300 hover:bg-opacity-90"
+        onClick={onClick}
+    >
+        {direction === 'prev' ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
+    </button>
+);
+
 const ServicesCarousel = () => {
     const cards = HomeServices;
     const swiperRef = useRef<SwiperType | null>(null);
+
+    const handlePrev = useCallback(() => swiperRef.current?.slidePrev(), []);
+    const handleNext = useCallback(() => swiperRef.current?.slideNext(), []);
 
     const [cardsToShow, setCardsToShow] = useState<number>(3);
     const updateCardsToShow = () => {
@@ -46,19 +58,13 @@ const ServicesCarousel = () => {
                 </div>
                 <Link
                     href="/packages"
-                    className="flex items-center gap-[2px] text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl hover:scale-105 transition-all ease-in-out duration-500 h-10 min-w-24 justify-center"
+                    className="flex items-center gap-[2px] bg-red-300 rounded hover:scale-105 transition-all ease-in-out duration-500 h-10 min-w-24 justify-center"
                 >
                     <span className="font-medium text-sm">View All</span>
                     <FiArrowRight />
                 </Link>
             </div>
             <div className="flex items-center justify-between gap-10">
-                {/* <button
-                    className="p-3 transition-colors bg-gray-500 bg-opacity-70 text-white rounded-full w-10 h-10 md:flex items-center justify-center text-xl duration-300 hover:bg-opacity-90 hidden"
-                    onClick={() => swiperRef.current?.slidePrev()}
-                >
-                    <FiChevronLeft size={24} />
-                </button> */}
                 <Swiper
                     slidesPerView={cardsToShow}
                     spaceBetween={30}
@@ -75,26 +81,10 @@ const ServicesCarousel = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                {/* <button
-                    className="p-3 transition-colors bg-gray-500 bg-opacity-70 text-white rounded-full w-10 h-10 md:flex items-center justify-center text-xl duration-300 hover:bg-opacity-90 hidden"
-                    onClick={() => swiperRef.current?.slideNext()}
-                >
-                    <FiChevronRight size={24} />
-                </button> */}
             </div>
-            <div className="flex justify-center gap-4 mt-7">
-                <button
-                    className="p-3 transition-colors bg-gray-500 bg-opacity-70 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl duration-300 hover:bg-opacity-90"
-                    onClick={() => swiperRef.current?.slidePrev()}
-                >
-                    <FiChevronLeft size={24} />
-                </button>
-                <button
-                    className="p-3 transition-colors bg-gray-500 bg-opacity-70 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl duration-300 hover:bg-opacity-90"
-                    onClick={() => swiperRef.current?.slideNext()}
-                >
-                    <FiChevronRight size={24} />
-                </button>
+            <div className="flex justify-center gap-4 mt-5">
+                <NavigationButton direction="prev" onClick={handlePrev} />
+                <NavigationButton direction="next" onClick={handleNext} />
             </div>
         </div>
     );

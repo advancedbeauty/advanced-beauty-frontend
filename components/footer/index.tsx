@@ -3,7 +3,10 @@ import Section from '../ui/features/Section';
 import Container from '../ui/features/Container';
 import Image from 'next/image';
 import SocialIcon from '../ui/social-icon';
-import { FaFacebook, FaS } from 'react-icons/fa6';
+import { FaInstagram, FaLinkedinIn } from 'react-icons/fa6';
+import { CgFacebook } from 'react-icons/cg';
+import { FaYoutube } from 'react-icons/fa';
+import { IoIosMail } from 'react-icons/io';
 
 const Footer = () => {
     return (
@@ -24,13 +27,14 @@ const Footer = () => {
                         Advanced Beauty
                     </div>
                     <div className='flex gap-5'>
-                        <SocialIcon icon={FaFacebook} href='/' />
-                        <SocialIcon icon={FaFacebook} href='/' />
-                        <SocialIcon icon={FaFacebook} href='/' />
-                        <SocialIcon icon={FaFacebook} href='/' />
+                        <SocialIcon color='#000' className='bg-neutral-400 hover:bg-gray-100 transition duration-150' icon={CgFacebook} href='/' />
+                        <SocialIcon color='#000' className='bg-neutral-400 hover:bg-gray-100 transition duration-150' icon={FaInstagram} href='/' />
+                        <SocialIcon color='#000' className='bg-neutral-400 hover:bg-gray-100 transition duration-150' icon={FaYoutube} href='/' />
+                        <SocialIcon color='#000' className='bg-neutral-400 hover:bg-gray-100 transition duration-150' icon={IoIosMail} href='/' />
+                        <SocialIcon color='#000' className='bg-neutral-400 hover:bg-gray-100 transition duration-150' icon={FaLinkedinIn} href='/' />
                     </div>
                 </div>
-                <div className='border-b'></div>
+                <div className='border-b border-neutral-400'></div>
             </Container>
         </Section>
     );
