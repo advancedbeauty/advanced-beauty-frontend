@@ -12,8 +12,8 @@ const roboslab = Roboto_Slab({
 const HomeAboutSection = () => {
     return (
         <Section className="py-20 md:py-40">
-            <Container className="w-full flex flex-col lg:flex-row items-center justify-center md:justify-between gap-10 relative text-center lg:text-left">
-                <div className="absolute left-1/2 -translate-x-1/2 w-full top-1/2 -translate-y-1/2 overflow-hidden pointer-events-none">
+            <Container className="w-full flex flex-col lg:flex-row items-center justify-center md:justify-between gap-10 relative text-center lg:text-left lg:px-10">
+                <div className="absolute left-1/2 -translate-x-1/2 w-full top-1/2 -translate-y-1/2 pointer-events-none">
                     <span className="select-none text-[150px] sm:text-[200px] md:text-[300px] lg:text-[385px] font-quentin z-[5] text-[#FBF1EA] whitespace-nowrap">nail bar</span>
                 </div>
                 <div className="z-10 w-full lg:w-1/2">
