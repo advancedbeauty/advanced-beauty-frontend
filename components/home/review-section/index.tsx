@@ -6,7 +6,7 @@ import Section from '@/components/ui/features/Section';
 const ReviewsCarousel = dynamic(() => import('@/components/home/review-section/reviews-carousel'), { ssr: false });
 
 const HomeReviewSection: React.FC = () => (
-    <Section className="py-20">
+    <Section className="py-20 bg-red-50">
         <Container className="w-full">
             <div className="w-full flex flex-col items-center gap-2 mb-16">
                 <h2 className="font-quentin text-3xl font-semibold">testimonials</h2>

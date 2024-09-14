@@ -3,14 +3,14 @@ import Section from '@/components/ui/features/Section';
 import React from 'react';
 import { HomeServices } from '@/data/homeServices';
 import { FiArrowRight } from 'react-icons/fi';
-import Servicecard from '@/components/home/service-section/service-card';
+import ShopCard from '@/components/home/shop-section/shop-card';
 import Link from 'next/link';
 import CustomCarousel from '@/components/ui/custom-carousel';
 
-const HomeServiceSection = () => {
-    
+const HomeShopSection = () => {
+
     const carouselItems = HomeServices.map((card, index) => (
-        <Servicecard key={index} src={card.src} title={card.heading} price={card.price} />
+        <ShopCard key={index} src={card.src} title={card.heading} price={card.price} />
     ));
 
     return (
@@ -18,8 +18,8 @@ const HomeServiceSection = () => {
             <Container className="w-full flex flex-col gap-10 py-8">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div className="flex flex-col gap-1">
-                        <h2 className="font-bold text-2xl sm:text-3xl">Our Services</h2>
-                        <p className="font-semibold text-xl text-gray-600">Most Trending Services</p>
+                        <h2 className="font-bold text-2xl sm:text-3xl">Our Products</h2>
+                        <p className="font-semibold text-xl text-gray-600">Buy your favourite items</p>
                     </div>
                     <Link
                         href="/packages"
@@ -46,4 +46,4 @@ const HomeServiceSection = () => {
     );
 };
 
-export default HomeServiceSection;
+export default HomeShopSection;

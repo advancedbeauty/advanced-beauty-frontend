@@ -31,7 +31,7 @@ const HomeAboutSection = () => {
                             <div className='text-5xl sm:text-7xl'>
                                 18
                             </div>
-                            <div className='flex flex-col text-lg sm:text-2xl font-light'>
+                            <div className='flex flex-col text-lg sm:text-2xl font-light text-start'>
                                 <span>Professional</span>
                                 <span>masters</span>
                             </div>
@@ -40,7 +40,7 @@ const HomeAboutSection = () => {
                             <div className='text-5xl sm:text-7xl'>
                                 265
                             </div>
-                            <div className='flex flex-col text-lg sm:text-2xl font-light'>
+                            <div className='flex flex-col text-lg sm:text-2xl font-light text-start'>
                                 <span>Nail polish</span>
                                 <span>colors</span>
                             </div>
