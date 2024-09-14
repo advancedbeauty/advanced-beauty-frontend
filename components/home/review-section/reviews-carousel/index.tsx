@@ -30,7 +30,7 @@ const ReviewsCarousel = () => {
     return (
         <div className="w-full mt-16">
             <div className="flex items-center justify-between gap-5">
-                <div>
+                <div className='hidden md:flex'>
                     <NavigationButton direction="prev" onClick={handlePrev} />
                 </div>
                 <Swiper
@@ -49,7 +49,7 @@ const ReviewsCarousel = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                <div>
+                <div className='hidden md:flex'>
                     <NavigationButton direction="next" onClick={handleNext} />
                 </div>
             </div>
