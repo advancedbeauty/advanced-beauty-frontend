@@ -1,7 +1,6 @@
 .heroSection {
     position: relative;
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -14,7 +13,7 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 2s ease-in-out;
 }
 
 .imageContainer.active {
@@ -29,15 +28,21 @@
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
-    font-size: 3rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.heroMainTitle {
+    font-size: clamp(1.25rem, -0.0095rem + 8.3969vw, 8.125rem);
+}
+
+.heroSubTitleOne {
+    font-size: clamp(1.125rem, 0.6441rem + 3.2061vw, 3.75rem);
 }
 
 @keyframes zoomEffect {
     0% {
         transform: scale(1);
     }
-
     100% {
         transform: scale(1.1);
     }

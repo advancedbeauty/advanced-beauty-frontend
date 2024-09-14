@@ -10,7 +10,7 @@ import { IoIosMail } from 'react-icons/io';
 
 const Footer = () => {
     return (
-        <Section className="bg-[#111111] text-white py-10 relative">
+        <Section className="bg-[#111111] text-white pt-10 relative flex-col">
             <Container className="w-full flex flex-col gap-5">
                 <div className="w-full flex justify-center flex-col items-center gap-7">
                     <div className="rounded-[100%] bg-[#111111] p-5 absolute -top-[75px] left-1/2 -translate-x-1/2">
@@ -35,7 +35,15 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className='border-b border-neutral-400'></div>
+                <div className='border-b border-neutral-400'></div>
+                <div className='border-b border-neutral-400'></div>
             </Container>
+            <div className='w-full mt-5'>
+                <div className='border-b border-neutral-400'></div>
+                <Container className='w-full py-5 flex justify-center font-semibold text-sm text-neutral-400'>
+                    Copyright © 2024 ADVANCED BEAUTY. All rights reserved.
+                </Container>
+            </div>
         </Section>
     );
 };
