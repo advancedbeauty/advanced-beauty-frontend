@@ -9,6 +9,7 @@ import HeroSection from '@/components/home/hero-section';
 import HomeReviewSection from '@/components/home/review-section';
 import HomeServiceSection from '@/components/home/service-section';
 import HomeShopSection from '@/components/home/shop-section';
+import HomeSubscribeNewsletter from '@/components/home/subscribe-newsletter';
 import Navbar from '@/components/navbar';
 import React from 'react';
 
@@ -26,6 +27,7 @@ const page = () => {
             <HomeAwardsSection />
             <HomeCertificatesSection />
             <HomeFAQSection />
+            <HomeSubscribeNewsletter />
             <Footer />
         </main>
     );

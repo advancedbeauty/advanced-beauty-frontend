@@ -9,7 +9,7 @@ const HomeAwardsSection = () => {
     const carouselItems = HomeAwardsData.map((card, index) => <AwardsCard key={index} src={card.src} />);
 
     return (
-        <Section className="py-20">
+        <Section className="py-16 md:py-20">
             <Container className="w-full">
                 <CustomCarousel
                     items={carouselItems}

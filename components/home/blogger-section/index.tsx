@@ -4,7 +4,7 @@ import React from 'react';
 
 const HomeBloggerSection = () => {
     return (
-        <Section className="py-20">
+        <Section className="py-16 md:py-20">
             <Container>
                 Instagram posts
             </Container>
