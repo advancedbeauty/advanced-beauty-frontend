@@ -26,7 +26,7 @@ const HomeSubscribeNewsletter = () => {
                         <input
                             type="text"
                             placeholder="Enter your email..."
-                            className="border-b border-black px-4 py-3 w-full max-w-[500px] bg-transparent"
+                            className="border-b border-black px-4 py-3 w-full max-w-[500px] bg-transparent outline-none"
                         />
                         <button className="bg-black text-white px-4 py-3 w-full max-w-[400px]">
                             Subscribe

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import '@/stylesheets/globals.css';
 import localFont from 'next/font/local';
+import ScrollToTop from '@/components/ui/features/ScrollToTop';
 
 const customFont = localFont({
     src: [
@@ -31,6 +32,9 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${montserrat.className} ${customFont.variable}`}>
             <body>
+                <div className=" fixed bottom-10 right-3 cursor-pointer flex flex-col gap-3 z-50">
+                    <ScrollToTop />
+                </div>
                 {children}
             </body>
         </html>
