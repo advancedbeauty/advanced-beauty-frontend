@@ -14,10 +14,11 @@ interface CustomCarouselProps {
     items: React.ReactNode[];
     slidesPerView?: number | 'auto';
     spaceBetween?: number;
+    navigationOn?: boolean;
     loop?: boolean;
     breakpoints?: { [width: number]: { slidesPerView: number } };
     className?: string;
-    autoplay?: boolean | { delay: number; disableOnInteraction?: boolean, pauseOnMouseEnter?: boolean; };
+    autoplay?: boolean | { delay: number; disableOnInteraction?: boolean, pauseOnMouseEnter?: boolean, stopOnLastSlide?: boolean; };
     effect?: 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip';
     speed?: number;
 }
@@ -40,6 +41,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
     items,
     slidesPerView = 1,
     spaceBetween = 20,
+    navigationOn = false,
     loop = true,
     breakpoints,
     className = '',
@@ -47,26 +49,15 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
         delay: 3000,
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
+        stopOnLastSlide: false,
     },
     effect = 'slide',
     speed = 800,
 }) => {
     const swiperRef = useRef<SwiperType | null>(null);
-    const [showNavigation, setShowNavigation] = useState(true);
 
     const handlePrev = useCallback(() => swiperRef.current?.slidePrev(), []);
     const handleNext = useCallback(() => swiperRef.current?.slideNext(), []);
-
-    useEffect(() => {
-        const updateNavigation = () => {
-            const shouldShowNavigation = items.length > (typeof slidesPerView === 'number' ? slidesPerView : 1);
-            setShowNavigation(shouldShowNavigation);
-        };
-
-        updateNavigation();
-        window.addEventListener('resize', updateNavigation);
-        return () => window.removeEventListener('resize', updateNavigation);
-    }, [items.length, slidesPerView]);
 
     return (
         <div className={`w-full ${className}`}>
@@ -92,7 +83,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                {showNavigation && (
+                {navigationOn && (
                     <div className="flex justify-center gap-4 mt-6">
                         <NavigationButton direction="prev" onClick={handlePrev} />
                         <NavigationButton direction="next" onClick={handleNext} />

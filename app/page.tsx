@@ -23,8 +23,8 @@ const page = () => {
             <HomeShopSection />
             <HomeBloggerSection />
             <HomeReviewSection />
-            <HomeCertificatesSection />
             <HomeAwardsSection />
+            <HomeCertificatesSection />
             <HomeFAQSection />
             <Footer />
         </main>

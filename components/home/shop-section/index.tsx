@@ -34,6 +34,7 @@ const HomeShopSection = () => {
                     slidesPerView={3}
                     spaceBetween={20}
                     loop={true}
+                    navigationOn={true}
                     breakpoints={{
                         0: { slidesPerView: 1 },
                         500: { slidesPerView: 2 },
