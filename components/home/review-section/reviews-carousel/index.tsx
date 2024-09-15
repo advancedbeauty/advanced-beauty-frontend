@@ -16,6 +16,8 @@ const ReviewsCarousel: React.FC = () => {
                 spaceBetween={30}
                 loop={true}
                 className="custom-swiper"
+                autoplay={{ delay: 1500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+                speed={1500}
             />
         </div>
     );

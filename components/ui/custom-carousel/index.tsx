@@ -3,9 +3,11 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay, EffectFade, EffectFlip, EffectCoverflow, EffectCube, EffectCards, EffectCreative } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 interface CustomCarouselProps {
@@ -15,6 +17,9 @@ interface CustomCarouselProps {
     loop?: boolean;
     breakpoints?: { [width: number]: { slidesPerView: number } };
     className?: string;
+    autoplay?: boolean | { delay: number; disableOnInteraction?: boolean, pauseOnMouseEnter?: boolean; };
+    effect?: 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip';
+    speed?: number;
 }
 
 const NavigationButton: React.FC<{ direction: 'prev' | 'next'; onClick: () => void }> = React.memo(
@@ -38,6 +43,13 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
     loop = true,
     breakpoints,
     className = '',
+    autoplay = {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    },
+    effect = 'slide',
+    speed = 800,
 }) => {
     const swiperRef = useRef<SwiperType | null>(null);
     const [showNavigation, setShowNavigation] = useState(true);
@@ -67,7 +79,11 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
                     onBeforeInit={(swiper) => {
                         swiperRef.current = swiper;
                     }}
-                    modules={[Navigation]}
+                    modules={[Navigation, Autoplay, EffectFade, EffectFlip, EffectCoverflow, EffectCube, EffectCards, EffectCreative]}
+                    autoplay={autoplay}
+                    effect={effect}
+                    speed={speed}
+                    fadeEffect={{ crossFade: true }}
                     className="pb-12"
                 >
                     {items.map((item, index) => (

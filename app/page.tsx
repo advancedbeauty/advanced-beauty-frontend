@@ -1,5 +1,6 @@
 import Footer from '@/components/footer';
 import HomeAboutSection from '@/components/home/about-section';
+import HomeAwardsSection from '@/components/home/awards-section';
 import HomeBloggerSection from '@/components/home/blogger-section';
 import HomeCertificatesSection from '@/components/home/certificates-section';
 import HomeFAQSection from '@/components/home/faq-section';
@@ -23,6 +24,7 @@ const page = () => {
             <HomeBloggerSection />
             <HomeReviewSection />
             <HomeCertificatesSection />
+            <HomeAwardsSection />
             <HomeFAQSection />
             <Footer />
         </main>
