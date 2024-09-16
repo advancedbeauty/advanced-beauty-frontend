@@ -10,29 +10,29 @@ const roboslab = Roboto_Slab({
 
 const HomeSubscribeNewsletter = () => {
     return (
-        <Section className="py-28 bg-red-50">
-            <Container className='w-full flex flex-col lg:flex-row items-center justify-center md:justify-between gap-10 relative text-center lg:text-left lg:px-10'>
-                <div className="absolute left-1/2 -translate-x-1/2 w-full top-1/2 -translate-y-1/2 pointer-events-none flex justify-center items-center">
-                    <span className="select-none text-[150px] sm:text-[200px] md:text-[300px] lg:text-[350px] font-quentin z-[5] text-[#fff] whitespace-nowrap">
+        <Section className="py-16 sm:py-20 md:py-24 lg:py-28 bg-red-50">
+            <Container className='w-full flex flex-col items-center justify-center relative text-center px-4 sm:px-6 lg:px-8'>
+                <div className="absolute left-1/2 -translate-x-1/2 w-full top-1/2 -translate-y-1/2 pointer-events-none flex justify-center items-center overflow-hidden">
+                    <span className="select-none text-[100px] sm:text-[150px] md:text-[200px] lg:text-[250px] xl:text-[300px] font-quentin z-[5] text-white opacity-50 whitespace-nowrap">
                         Subscribe
                     </span>
                 </div>
-                <div className='z-10 flex items-center gap-10 justify-center w-full'>
-                    <div className={`flex flex-col uppercase ${roboslab.className} text-3xl font-[350]`}>
+                <form className='z-10 flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-10 w-full max-w-5xl mb-10 md:mb-2'>
+                    <div className={`flex flex-col lg:text-start uppercase ${roboslab.className} text-2xl sm:text-3xl font-[370] whitespace-nowrap`}>
                         <span>Subscribe to</span>
                         <span>our newsletter</span>
                     </div>
-                    <div className="w-full mt-6 md:mt-10 flex flex-col sm:flex-row justify-center lg:justify-start">
+                    <div className="w-full lg:w-auto mt-4 sm:mt-6 lg:mt-0 flex flex-col sm:flex-row justify-center gap-4 lg:gap-0 flex-grow lg:max-w-2xl">
                         <input
                             type="text"
                             placeholder="Enter your email..."
-                            className="border-b border-black px-4 py-3 w-full max-w-[500px] bg-transparent outline-none"
+                            className="border-b border-black px-4 py-3 w-full lg:flex-grow bg-transparent outline-none sm:text-left"
                         />
-                        <button className="bg-black text-white px-4 py-3 w-full max-w-[400px]">
+                        <button className="bg-black text-white px-6 py-3 w-full sm:w-auto whitespace-nowrap lg:ml-4">
                             Subscribe
                         </button>
                     </div>
-                </div>
+                </form>
             </Container>
         </Section>
     );
