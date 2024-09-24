@@ -26,7 +26,7 @@ const ScrollToTop = () => {
     }, [showScroll]);
 
     return (
-        <div className={`${showScroll ? 'block' : 'hidden'} bg-red-500 p-2 rounded-full`} onClick={scrollTop}>
+        <div className={`${showScroll ? 'block' : 'hidden'} bg-red-500 p-2 rounded`} onClick={scrollTop}>
             <RiArrowUpDoubleFill size={24} color="white" />
         </div>
     );
