@@ -7,6 +7,7 @@ import { FaInstagram, FaLinkedinIn } from 'react-icons/fa6';
 import { CgFacebook } from 'react-icons/cg';
 import { FaYoutube } from 'react-icons/fa';
 import { IoIosMail } from 'react-icons/io';
+import Link from 'next/link';
 
 const Footer = () => {
     return (
@@ -35,13 +36,48 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className='border-b border-neutral-400'></div>
+                <div className='flex flex-wrap items-center justify-around gap-5'>
+                    <Link href={'/'}>Terms & Conditions</Link>
+                    <Link href={'/'}>Terms & Conditions</Link>
+                    <Link href={'/'}>Terms & Conditions</Link>
+                    <Link href={'/'}>Terms & Conditions</Link>
+                </div>
                 <div className='border-b border-neutral-400'></div>
-                <div className='border-b border-neutral-400'></div>
+                <div className='px-5'>
+                    <span className='uppercase text-2xl font-semibold'>Get in touch</span>
+                    <div className='mt-5 flex flex-wrap justify-between gap-10'>
+                        <div>
+                            <span className='font-semibold text-lg'>Call us at</span>
+                            <div className='flex flex-col mt-3'>
+                                <span>+91 88262 07080</span>
+                                <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
+                                <span>Saturday: 09:00 AM - 07:00 PM</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span className='font-semibold text-lg'>Call us at</span>
+                            <div className='flex flex-col mt-3'>
+                                <span>+91 88262 07080</span>
+                                <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
+                                <span>Saturday: 09:00 AM - 07:00 PM</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span className='font-semibold text-lg'>Call us at</span>
+                            <div className='flex flex-col mt-3'>
+                                <span>+91 88262 07080</span>
+                                <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
+                                <span>Saturday: 09:00 AM - 07:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </Container>
             <div className='w-full mt-5'>
                 <div className='border-b border-neutral-400'></div>
-                <Container className='w-full py-5 flex justify-center font-semibold text-sm text-neutral-400'>
-                    Copyright © 2024 ADVANCED BEAUTY. All rights reserved.
+                <Container className='w-full py-5 flex justify-center items-center gap-2 md:gap-5 md:justify-between px-8 font-semibold text-sm flex-wrap text-center'>
+                    <span>Copyright © 2024 ADVANCED BEAUTY. All rights reserved.</span>
+                    <span>Designed with <span className={`text-red-500 text-lg select-none`}>&#x2665;</span> by <Link href={`https://diwakarjha.vercel.app/`} target="_blank" className={`text-red-500 hover:underline font-semibold`}>Diwakar Jha</Link>.</span>
                 </Container>
             </div>
         </Section>
