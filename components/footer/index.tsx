@@ -36,11 +36,11 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className='border-b border-neutral-400'></div>
-                <div className='flex flex-wrap items-center justify-around gap-5'>
+                <div className='flex flex-wrap items-center justify-around gap-5 font-medium'>
+                    <Link href={'/'}>Shop</Link>
                     <Link href={'/'}>Terms & Conditions</Link>
-                    <Link href={'/'}>Terms & Conditions</Link>
-                    <Link href={'/'}>Terms & Conditions</Link>
-                    <Link href={'/'}>Terms & Conditions</Link>
+                    <Link href={'/'}>Privacy Policy</Link>
+                    <Link href={'/'}>About Us</Link>
                 </div>
                 <div className='border-b border-neutral-400'></div>
                 <div className='px-5'>
@@ -48,7 +48,15 @@ const Footer = () => {
                     <div className='mt-5 flex flex-wrap justify-between gap-10'>
                         <div>
                             <span className='font-semibold text-lg'>Call us at</span>
-                            <div className='flex flex-col mt-3'>
+                            <div className='flex flex-col mt-3 text-neutral-400'>
+                                <span>+91 88262 07080</span>
+                                <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
+                                <span>Saturday: 09:00 AM - 07:00 PM</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span className='font-semibold text-lg'>Support</span>
+                            <div className='flex flex-col mt-3 text-neutral-400'>
                                 <span>+91 88262 07080</span>
                                 <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
                                 <span>Saturday: 09:00 AM - 07:00 PM</span>
@@ -56,15 +64,7 @@ const Footer = () => {
                         </div>
                         <div>
                             <span className='font-semibold text-lg'>Call us at</span>
-                            <div className='flex flex-col mt-3'>
-                                <span>+91 88262 07080</span>
-                                <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
-                                <span>Saturday: 09:00 AM - 07:00 PM</span>
-                            </div>
-                        </div>
-                        <div>
-                            <span className='font-semibold text-lg'>Call us at</span>
-                            <div className='flex flex-col mt-3'>
+                            <div className='flex flex-col mt-3 text-neutral-400'>
                                 <span>+91 88262 07080</span>
                                 <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
                                 <span>Saturday: 09:00 AM - 07:00 PM</span>
