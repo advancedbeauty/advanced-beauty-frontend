@@ -20,7 +20,7 @@ const HomeGetInTouch = () => {
                     className="w-[800px] h-[700px] ml-16 hidden lg:block"
                 />
                 <div className="bg-white w-full lg:w-[800px] sm:h-[500px] p-8 flex flex-col justify-center items-center gap-5 lg:absolute lg:right-16 lg:top-1/2 lg:-translate-y-1/2">
-                    <span className="font-quentin text-2xl sm:text-3xl">Get in touch</span>
+                    <span className="font-quentin text-2xl sm:text-3xl text-[#D9C1A3] font-medium">Get in touch</span>
                     <div className="uppercase flex flex-col items-center text-3xl sm:text-4xl lg:text-5xl gap-3 text-center">
                         <span>Book Time</span>
                         <span>To Get Manicure</span>

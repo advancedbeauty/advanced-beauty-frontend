@@ -19,10 +19,7 @@ const HomeShopSection = () => {
             <Container className="w-full flex flex-col gap-10 py-8">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <MainTitle heading='Our Products' subheading='Buy your favourite items'/>
-                    <Link
-                        href="/packages"
-                        className="flex items-center gap-2 bg-red-300 rounded hover:bg-red-400 transition-all ease-in-out duration-300 px-4 py-2 text-sm font-medium"
-                    >
+                    <Link href={''} className="bg-[#D9C1A3] rounded-[2px] p-2 text-neutral-950 font-medium text-sm flex items-center gap-2">
                         View All <FiArrowRight />
                     </Link>
                 </div>
