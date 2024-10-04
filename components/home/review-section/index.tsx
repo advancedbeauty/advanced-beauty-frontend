@@ -9,10 +9,10 @@ const HomeReviewSection: React.FC = () => {
     const carouselItems = ReviewsData.map((card) => <ReviewsCard key={card.name} {...card} />);
 
     return (
-        <Section className="py-20 bg-red-50">
+        <Section className="py-20 bg-[#FBF1EA]">
             <Container className="w-full">
                 <div className="w-full flex flex-col items-center gap-2 mb-16">
-                    <h2 className="font-quentin text-3xl font-semibold">testimonials</h2>
+                    <h2 className="font-quentin text-3xl font-semibold text-[#D9C1A3]">testimonials</h2>
                     <h3 className="text-4xl font-semibold">what our client says</h3>
                 </div>
                 <div className="w-full">

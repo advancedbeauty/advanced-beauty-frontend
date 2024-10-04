@@ -24,8 +24,8 @@ const Footer = () => {
                             className="w-[120px] select-none"
                         />
                     </div>
-                    <div className='uppercase mt-10 text-xl font-bold'>
-                        Advanced Beauty
+                    <div className='mt-7'>
+                        <Image src="/logo_name.png" alt="" width={1000000} height={1000000} quality={100} className='w-[350px] select-none'/>
                     </div>
                     <div className='flex gap-5'>
                         <SocialIcon color='#000' className='bg-neutral-400 hover:bg-gray-100 transition duration-150' icon={CgFacebook} href='/' />

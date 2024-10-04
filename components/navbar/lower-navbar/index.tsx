@@ -15,10 +15,10 @@ const LowerNavbar = () => {
                 <div className="hidden md:flex items-center gap-5">
                     <Navlinks />
                     {/* <Menu /> */}
-                    <Link href={''} className="bg-red-100 p-2 rounded-full text-black">
-                        <BsCart2 size={20} strokeWidth={0.2}/>
+                    <Link href={''} className="bg-[#D9C1A3] p-2 rounded-full text-neutral-950">
+                        <BsCart2 size={20} strokeWidth={0.2} />
                     </Link>
-                    <Link href={''} className="bg-red-100 rounded-[2px] p-2 text-black font-semibold text-sm">
+                    <Link href={''} className="bg-[#D9C1A3] rounded-[2px] p-2 text-neutral-950 font-semibold text-sm">
                         <span>LOGIN</span>
                     </Link>
                 </div>
