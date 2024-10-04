@@ -36,8 +36,9 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className='border-b border-neutral-400'></div>
-                <div className='flex flex-wrap items-center justify-around gap-5 font-medium'>
+                <div className='flex flex-wrap items-center justify-around gap-7 font-medium text-center'>
                     <Link href={'/'}>Shop</Link>
+                    <Link href={'/'}>Services</Link>
                     <Link href={'/'}>Terms & Conditions</Link>
                     <Link href={'/'}>Privacy Policy</Link>
                     <Link href={'/'}>About Us</Link>
@@ -73,7 +74,7 @@ const Footer = () => {
                     </div>
                 </div>
             </Container>
-            <div className='w-full mt-5'>
+            <div className='w-full mt-5 mb-20 lg:mb-0'>
                 <div className='border-b border-neutral-400'></div>
                 <Container className='w-full py-5 flex justify-center items-center gap-2 md:gap-5 md:justify-between px-8 font-semibold text-sm flex-wrap text-center'>
                     <span>Copyright © 2024 ADVANCED BEAUTY. All rights reserved.</span>

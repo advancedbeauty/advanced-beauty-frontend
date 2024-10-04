@@ -16,9 +16,9 @@ const LowerNavbar = () => {
                     <Navlinks />
                     {/* <Menu /> */}
                     <Link href={''} className="bg-red-100 p-2 rounded-full text-black">
-                        <BsCart2 size={17} strokeWidth={0.3}/>
+                        <BsCart2 size={20} strokeWidth={0.2}/>
                     </Link>
-                    <Link href={''} className="bg-red-100 rounded p-2 text-black font-semibold text-sm">
+                    <Link href={''} className="bg-red-100 rounded-[2px] p-2 text-black font-semibold text-sm">
                         <span>LOGIN</span>
                     </Link>
                 </div>

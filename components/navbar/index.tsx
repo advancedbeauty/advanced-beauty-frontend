@@ -3,12 +3,12 @@ import UpperNavbar from './upper-navbar';
 import LowerNavbar from './lower-navbar';
 
 const Navbar = () => {
-  return (
-    <div className='w-full fixed z-40 top-0'>
-      <UpperNavbar className='hidden md:flex'/>
-      <LowerNavbar />
-    </div>
-  )
-}
+    return (
+        <div className="w-full fixed z-40 top-0">
+            <UpperNavbar className="hidden md:flex" />
+            <LowerNavbar />
+        </div>
+    );
+};
 
 export default Navbar;
