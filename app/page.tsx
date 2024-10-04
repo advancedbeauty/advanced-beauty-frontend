@@ -1,4 +1,5 @@
 import Footer from '@/components/footer';
+import FooterBar from '@/components/footer/footer-bar';
 import HomeAboutSection from '@/components/home/about-section';
 import HomeAwardsSection from '@/components/home/awards-section';
 import HomeBloggerSection from '@/components/home/blogger-section';
@@ -15,7 +16,7 @@ import React from 'react';
 
 const page = () => {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-start min-w-screen overflow-x-hidden">
+        <main className="flex min-h-screen flex-col items-center justify-start min-w-screen overflow-x-hidden relative">
             <Navbar />
             <HeroSection />
             <HomeAboutSection />
@@ -28,6 +29,7 @@ const page = () => {
             <HomeCertificatesSection />
             <HomeFAQSection />
             <HomeSubscribeNewsletter />
+            <FooterBar />
             <Footer />
         </main>
     );

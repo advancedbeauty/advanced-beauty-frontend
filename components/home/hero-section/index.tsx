@@ -17,7 +17,6 @@ interface Image {
 
 const images: Image[] = [
     { src: '/SLIDE_01.jpg', heading: 'Art Manicure' },
-    // { src: '/SLIDE_02.jpg', heading: 'Art Manicure' },
     { src: '/SLIDE_03.jpg', heading: 'Art Manicure' },
     { src: '/SLIDE_04.jpg', heading: 'Art Manicure' },
 ];
@@ -33,7 +32,7 @@ const HeroSection: React.FC = () => {
     }, []);
 
     return (
-        <div className={`${styles.heroSection} h-[600px] sm:h-[700px] md:h-screen`}>
+        <div className={`${styles.heroSection} h-[600px] md:h-[700px] lg:h-screen`}>
             {images.map((image, index) => (
                 <div
                     key={index}
@@ -47,11 +46,13 @@ const HeroSection: React.FC = () => {
                         <span className={`${styles.heroMainTitle} ${roboslab.className} uppercase leading-tight`}>
                             {image.heading}
                         </span>
-                        <span className='mt-4'>
-                            Creative color styles. Always in trend. Best quality.
-                        </span>
-                        <Link href={'/'} className='border border-white mt-10 px-5 py-3 flex items-center gap-2 text-xs sm:text-sm lg:text-base'>
-                            Read More
+                        <div className='mt-4 flex flex-col sm:flex-row gap-2 overflow-hidden'>
+                            <div>Best quality.</div>
+                            <div>Always in trend.</div> 
+                            <div>Creative color styles.</div>
+                        </div>
+                        <Link href={'/'} className='border border-white hover:bg-white hover:text-black mt-10 px-5 py-3 flex items-center gap-2 text-xs sm:text-sm lg:text-base'>
+                            Buy Now
                             <FaArrowRight />
                         </Link>
                     </div>
