@@ -5,7 +5,7 @@ import React from 'react';
 const TermsAndConditions = () => {
     return (
         <Section className='py-5 md:py-10 lg:py-16'>
-            <Container className='w-full flex flex-col gap-10 md:mb-10'>
+            <Container className='w-full flex flex-col gap-10 mb-10'>
                 <span className='text-3xl font-bold'>Terms & Conditions:</span>
                 <ul className='pl-7 md:pl-10 lg:pl-16 list-decimal flex flex-col gap-7'>
                     <li className='font-bold text-xl'>
