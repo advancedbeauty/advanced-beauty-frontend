@@ -11,7 +11,7 @@ interface RoutesLayoutProps {
 const RoutesLayout: React.FC<RoutesLayoutProps> = ({ children }) => {
     return (
         <NavbarMarginLayout>
-            <main className='flex min-h-screen flex-col items-center justify-start w-full overflow-x-hidden'>
+            <main className='flex flex-col items-center justify-start w-full overflow-x-hidden'>
                 {children}
                 <HomeSubscribeNewsletter />
                 <FooterBar />

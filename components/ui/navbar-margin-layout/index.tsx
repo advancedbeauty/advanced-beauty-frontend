@@ -50,7 +50,7 @@ const NavbarMarginLayout: React.FC<NavbarMarginLayoutProps> = ({ children }) => 
             <div 
                 className="transition-[padding] duration-200"
                 style={{ 
-                    paddingTop: navbarHeight ? `${navbarHeight}px` : 'var(--navbar-height-fallback, 60px)'
+                    paddingTop: navbarHeight ? `${navbarHeight}px` : 'var(--navbar-height-fallback, 110px)'
                 }}
             >
                 {children}
