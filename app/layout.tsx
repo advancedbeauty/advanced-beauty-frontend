@@ -4,6 +4,7 @@ import '@/stylesheets/globals.css';
 import localFont from 'next/font/local';
 import ScrollToTop from '@/components/ui/features/ScrollToTop';
 import { WhatsAppSolid } from '@/public/svgs';
+import NextTopLoader from 'nextjs-toploader';
 
 const customFont = localFont({
     src: [
@@ -33,6 +34,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${montserrat.className} ${customFont.variable}`}>
             <body>
+                <NextTopLoader color="#FF5956" height={3} showSpinner={false} />
                 <div className="fixed bottom-24 lg:bottom-10 right-3 cursor-pointer flex flex-col gap-3 z-50">
                     <ScrollToTop />
                     <a href={`https://api.whatsapp.com/send?phone=%2B918826207080`} target="_blank" rel="noopener noreferrer" className="">

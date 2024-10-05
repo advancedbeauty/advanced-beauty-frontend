@@ -26,8 +26,8 @@ const ShopCard: React.FC<ShopCardProps> = ({src, title, price}) => {
                     {title}
                 </span>
                 <div className='flex gap-5'>
-                    <span className="uppercase font-semibold text-lg">&#8377;<s>{price}</s></span>
-                    <span className='uppercase font-semibold text-lg'>
+                    <span className="uppercase font-semibold text-lg text-neutral-400">&#8377;<s>{price}</s></span>
+                    <span className='uppercase font-semibold text-lg text-red-700'>
                         &#8377;{price}
                     </span>
                 </div>
