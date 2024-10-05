@@ -58,17 +58,16 @@ const Footer = () => {
                         <div>
                             <span className='font-semibold text-lg'>Support</span>
                             <div className='flex flex-col mt-3 text-neutral-400'>
-                                <span>+91 88262 07080</span>
-                                <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
-                                <span>Saturday: 09:00 AM - 07:00 PM</span>
+                                <span>support@advancedbeauty.in</span>
                             </div>
                         </div>
                         <div>
-                            <span className='font-semibold text-lg'>Call us at</span>
+                            <span className='font-semibold text-lg'>Address</span>
                             <div className='flex flex-col mt-3 text-neutral-400'>
-                                <span>+91 88262 07080</span>
-                                <span>Monday to Friday: 09:00 AM - 09:00 PM</span>
-                                <span>Saturday: 09:00 AM - 07:00 PM</span>
+                                <span>House no 120, Mata Wali Gali,</span>
+                                <span>near agarwal dharmshala,</span>
+                                <span>Molar band Extension, Mithapur,</span>
+                                <span>New Delhi, Delhi 110044</span>
                             </div>
                         </div>
                     </div>
