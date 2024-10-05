@@ -1,3 +1,4 @@
+// MenuContainer.jsx
 'use client';
 
 import UpperNavbar from '@/components/navbar/upper-navbar';
@@ -20,19 +21,24 @@ const MenuContainer: React.FC<MenuContainerProps> = ({ onClose }) => {
     return (
         <>
             {/* Backdrop */}
-            <div className="fixed inset-0 bg-black/50 z-40" aria-hidden="true" onClick={onClose} />
+            <div
+                className="fixed inset-0 bg-black/50 z-40"
+                aria-hidden="true"
+                onClick={onClose}
+            />
 
             {/* Menu Panel */}
             <div
                 role="dialog"
                 aria-modal="true"
-                className="fixed top-0 left-0 w-full max-w-[640px] h-screen bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out text-black overflow-y-auto"
+                className={`fixed top-0 left-0 w-full max-w-[640px] h-screen bg-white z-50 shadow-xl transition-transform duration-300 ease-in-out text-black overflow-y-auto`}
+                
             >
-                <header className="">
+                <header>
                     <UpperNavbar />
-                    <div className='flex items-center justify-between gap-20 py-2 px-4 bg-[#111111] text-white'>
-                        <Logo onClick={onClose}/>
-                        <IoClose size={40} onClick={onClose} />
+                    <div className='flex items-center justify-between gap-[70px] py-2 px-4 bg-[#111111] text-white'>
+                        <Logo onClick={onClose} />
+                        <IoClose size={40} color="#FBF1EA" onClick={onClose} />
                     </div>
                 </header>
             </div>
