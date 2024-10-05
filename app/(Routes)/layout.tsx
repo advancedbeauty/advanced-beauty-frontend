@@ -1,4 +1,5 @@
 import Footer from '@/components/footer';
+import FooterBar from '@/components/footer/footer-bar';
 import Navbar from '@/components/navbar';
 import React from 'react';
 
@@ -13,6 +14,7 @@ const RoutesLayout: React.FC<RoutesLayoutProps> = ({ children }) => {
             <div className='min-h-screen'>
                 {children}
             </div>
+            <FooterBar />
             <Footer />
         </div>
     );
