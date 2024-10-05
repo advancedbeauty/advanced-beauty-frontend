@@ -19,9 +19,9 @@ const IconLink: React.FC<IconLinkProps> = ({ icon: Icon, activeIcon: ActiveIcon,
     return (
         <Link href={href} className="flex flex-col justify-center items-center">
             {isActive ? (
-                <ActiveIcon size={24} className="text-[#D9C1A3]" />
+                <ActiveIcon size={26} className="text-[#D9C1A3]" />
             ) : (
-                <Icon size={24} className="text-[#a3a3a3] hover:text-[#D9C1A3]" />
+                <Icon size={26} className="text-[#a3a3a3] hover:text-[#D9C1A3]" />
             )}
             <p className={`text-[10px] ${isActive ? 'text-[#D9C1A3] font-semibold' : 'text-[#a3a3a3] hover:text-[#D9C1A3]'}`}>
                 {text}
