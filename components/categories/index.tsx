@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { categoriesData } from '@/data/categoriesData';
 import Section from '../ui/features/Section';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Categories = () => {
     const categories = categoriesData;
@@ -11,14 +12,15 @@ const Categories = () => {
         <Section>
             <div className='w-full max-w-[1500px]'>
                 <Tabs defaultValue={categories[0].id} className="w-full flex h-[75vh] sticky">
-                    <div className="w-1/5 min-w-[150px] max-w-[320px] bg-[#D9C1A3] py-3 px-1">
+                    <div className="w-1/5 min-w-[150px] max-w-[320px] bg-[#D9C1A3] py-3 px-1 md:px-2">
                         <TabsList className="flex flex-col h-auto">
                             {categories.map((category) => (
                                 <TabsTrigger
                                     key={category.id}
                                     value={category.id}
-                                    className="w-full rounded justify-start mb-1 text-left md:text-lg lg:text-xl"
+                                    className="w-full rounded justify-center mb-1 text-left md:text-lg lg:text-xl flex flex-col lg:flex-row gap-1 lg:gap-3 items-center"
                                 >
+                                    <Image src={category.img} alt={category.name} width={1000000} height={1000000} className='w-16 h-16'/>
                                     {category.name}
                                 </TabsTrigger>
                             ))}

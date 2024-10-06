@@ -37,11 +37,11 @@ const Footer = () => {
                 </div>
                 <div className='border-b border-neutral-400'></div>
                 <div className='flex flex-wrap items-center justify-around gap-7 font-medium text-center'>
-                    <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/'}>Shop</Link>
-                    <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/'}>Services</Link>
-                    <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/legal/tnc'}>Terms & Conditions</Link>
-                    <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/legal/privacy-policy'}>Privacy Policy</Link>
                     <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/'}>About Us</Link>
+                    <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/legal/privacy-policy'}>Privacy Policy</Link>
+                    <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/legal/tnc'}>Terms & Conditions</Link>
+                    <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/'}>FAQ</Link>
+                    <Link className='hover:underline hover:text-[#D9C1A3] transition duration-100' href={'/'}>Contact Us</Link>
                 </div>
                 <div className='border-b border-neutral-400'></div>
                 <div className='px-5'>
