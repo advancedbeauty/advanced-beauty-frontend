@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { categoriesData } from '@/data/categoriesData';
 import Section from '../ui/features/Section';
+import Link from 'next/link';
 
 const Categories = () => {
     const categories = categoriesData;
@@ -36,6 +37,9 @@ const Categories = () => {
                                             {item}
                                         </div>
                                     ))}
+                                    <Link href={category.href} className='p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow'>
+                                        View All
+                                    </Link>
                                 </div>
                             </TabsContent>
                         ))}
