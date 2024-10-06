@@ -74,7 +74,7 @@ const TermsAndConditions = () => {
                     <li className='font-bold text-xl'>
                         <span>Contact Information</span>
                         <ul className='list-disc pl-4 font-normal text-base gap-1 flex flex-col mt-1'>
-                            <li>For any queries or concerns, please contact us at support@advancedbeauty.in or call us at 8882617743.</li>
+                            <li>For any queries or concerns, please contact us at support@advancedbeauty.in or call us at 8826207080.</li>
                             <li>We are here to assist you and ensure your experience is satisfactory.</li>
                         </ul>
                     </li>

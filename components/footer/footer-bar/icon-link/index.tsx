@@ -9,7 +9,7 @@ interface IconLinkProps {
     icon: IconType;
     activeIcon: IconType;
     href: string;
-    text: string;
+    text?: string;
 }
 
 const IconLink: React.FC<IconLinkProps> = ({ icon: Icon, activeIcon: ActiveIcon, href, text }) => {

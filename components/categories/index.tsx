@@ -11,7 +11,7 @@ const Categories = () => {
     return (
         <Section>
             <div className='w-full max-w-[1500px]'>
-                <Tabs defaultValue={categories[0].id} className="w-full flex h-[75vh] sticky">
+                <Tabs defaultValue={categories[0].id} className="w-full flex h-[76vh] sticky">
                     <div className="w-1/5 min-w-[150px] max-w-[320px] bg-[#D9C1A3] py-3 px-1 md:px-2">
                         <TabsList className="flex flex-col h-auto">
                             {categories.map((category) => (
