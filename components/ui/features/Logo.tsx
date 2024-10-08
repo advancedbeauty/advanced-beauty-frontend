@@ -11,7 +11,7 @@ const Logo: React.FC<LogoProps> = ({ className, onClick }) => {
     return (
         <Link href={'/'} onClick={onClick} className={`${className} select-none logo-font font-bold text-2xl flex items-center gap-3`}>
             <Image
-                src="/logo_full.png"
+                src="/logo/logo_full.png"
                 alt="Logo"
                 width={1000000}
                 height={1000000}

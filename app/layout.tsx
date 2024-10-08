@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
-import '@/stylesheets/globals.css';
 import localFont from 'next/font/local';
+import NextTopLoader from 'nextjs-toploader';
+import '@/stylesheets/globals.css';
 import ScrollToTop from '@/components/ui/features/ScrollToTop';
 import { WhatsAppSolid } from '@/public/svgs';
-import NextTopLoader from 'nextjs-toploader';
 
 const customFont = localFont({
     src: [
@@ -14,11 +13,6 @@ const customFont = localFont({
         },
     ],
     variable: '--font-quentin',
-});
-
-const montserrat = Montserrat({
-    subsets: ['latin'],
-    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
@@ -39,7 +33,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${montserrat.className} ${customFont.variable}`}>
+        <html lang="en" className={`${customFont.variable}`}>
             <body>
                 <NextTopLoader color="#FF5956" height={3} showSpinner={false} />
                 <div className="fixed bottom-24 lg:bottom-10 right-3 cursor-pointer flex flex-col gap-3 z-40">

@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="w-full flex justify-center flex-col items-center gap-7">
                     <div className="rounded-[100%] bg-[#111111] p-5 absolute -top-[75px] left-1/2 -translate-x-1/2">
                         <Image
-                            src="/logo.png"
+                            src="/logo/logo.png"
                             alt=""
                             width={1000000}
                             height={100000}
@@ -25,7 +25,7 @@ const Footer = () => {
                         />
                     </div>
                     <div className='mt-7'>
-                        <Image src="/logo_name.png" alt="" width={1000000} height={1000000} quality={100} className='w-[350px] select-none'/>
+                        <Image src="/logo/logo_name.png" alt="" width={1000000} height={1000000} quality={100} className='w-[350px] select-none'/>
                     </div>
                     <div className='flex gap-5'>
                         <SocialIcon color='#000' className='bg-neutral-400 hover:bg-gray-100 transition duration-150' icon={CgFacebook} href='/' />

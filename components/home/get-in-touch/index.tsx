@@ -9,11 +9,11 @@ const HomeGetInTouch = () => {
     return (
         <Section
             className="py-16 sm:py-20 bg-fixed bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/getintouch_parallax.jpg')" }}
+            style={{ backgroundImage: "url('/images/getintouch-section/getintouch_parallax.jpg')" }}
         >
             <Container className="w-full relative flex items-center">
                 <Image
-                    src={'/getInTouch.jpg'}
+                    src={'/images/getintouch-section/getInTouch.jpg'}
                     alt="Get in touch"
                     width={1000000}
                     height={1000000}

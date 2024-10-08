@@ -7,7 +7,7 @@ const HomeCertificatesSection = () => {
     return (
         <Section
             className="py-8 sm:py-16 bg-fixed bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/parallax_certificate.jpg')" }}
+            style={{ backgroundImage: "url('/images/certificate-section/parallax_certificate.jpg')" }}
         >
             <Container className="w-full">
                 <div className="flex flex-col md:flex-row gap-4 md:gap-10">

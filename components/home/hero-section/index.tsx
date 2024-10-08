@@ -19,17 +19,17 @@ interface SlideImage {
 
 const slides: SlideImage[] = [
     { 
-        src: '/SLIDE_01.jpg', 
+        src: '/images/hero-section/SLIDE_01.jpg', 
         heading: 'Art Manicure',
         alt: 'Art Manicure Slide 1'
     },
     { 
-        src: '/SLIDE_03.jpg', 
+        src: '/images/hero-section/SLIDE_03.jpg', 
         heading: 'Art Manicure',
         alt: 'Art Manicure Slide 2'
     },
     { 
-        src: '/SLIDE_04.jpg', 
+        src: '/images/hero-section/SLIDE_04.jpg', 
         heading: 'Art Manicure',
         alt: 'Art Manicure Slide 3'
     },
