@@ -30,7 +30,7 @@ const ScrollToTop = () => {
         return () => {
             window.removeEventListener('scroll', checkScrollTop);
         };
-    }, [showScroll]);
+    }, [checkScrollTop]);
 
     return (
         <div className='relative cursor-pointer' onClick={scrollTop}>

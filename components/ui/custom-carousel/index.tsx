@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
 import { Navigation, Autoplay, EffectFade, EffectFlip, EffectCoverflow, EffectCube, EffectCards, EffectCreative } from 'swiper/modules';
