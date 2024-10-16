@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Section from '@/components/ui/features/Section';
 import Container from '@/components/ui/features/Container';
 import Logo from '@/components/ui/features/Logo';
@@ -10,8 +10,8 @@ import { BsCart2 } from 'react-icons/bs';
 import Menu from '@/components/navbar/lower-navbar/menu';
 import IconLink from '@/components/footer/footer-bar/icon-link';
 import { BiSolidOffer } from 'react-icons/bi';
-import axiosApi from '@/utils/refresh-interceptors';
-import LogoutBtn from './logout-btn';
+// import axiosApi from '@/utils/refresh-interceptors';
+// import LogoutBtn from './logout-btn';
 
 const LowerNavbar = () => {
     // const [loggedIn, setLoggedIn] = useState(false);
