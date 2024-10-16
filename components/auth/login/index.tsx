@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { MdEmail, MdLock, MdVisibility, MdVisibilityOff } from 'react-icons/md';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 // import toast from 'react-hot-toast';
 // import axiosApi from '@/utils/refresh-interceptors';
 
@@ -11,7 +11,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const router = useRouter();
+    // const router = useRouter();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
