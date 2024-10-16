@@ -46,10 +46,10 @@ const HomeAboutSection = () => {
                 </div>
                 <div className="flex flex-row gap-5 z-10 w-full lg:w-1/2">
                     <div className="w-1/2">
-                        <Image src={'/images/aboutSection/aboutImg-1.jpg'} alt="" width={1000} height={1000} className="w-full h-auto object-cover" />
+                        <Image src={'/temp/services/bridal_makeup.jpeg'} alt="" width={1000} height={1000} className="w-full h-auto object-cover" />
                     </div>
                     <div className="w-1/2">
-                        <Image src={'/images/aboutSection/aboutImg-1.jpg'} alt="" width={1000} height={1000} className="w-full h-auto object-cover" />
+                        <Image src={'/temp/services/luxury.jpeg'} alt="" width={1000} height={1000} className="w-full h-auto object-cover" />
                     </div>
                 </div>
             </Container>

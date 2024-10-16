@@ -4,6 +4,7 @@ import NextTopLoader from 'nextjs-toploader';
 import '@/stylesheets/globals.css';
 import ScrollToTop from '@/components/ui/features/ScrollToTop';
 import { WhatsAppSolid } from '@/public/svgs';
+import { Toaster } from 'react-hot-toast';
 
 const customFont = localFont({
     src: [
@@ -33,8 +34,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${customFont.variable}`}>
+        <html lang="en" className={`${customFont.variable} antialiased`}>
             <body>
+                <Toaster />
                 <NextTopLoader color="#FF5956" height={3} showSpinner={false} />
                 <div className="fixed bottom-24 lg:bottom-10 right-3 cursor-pointer flex flex-col gap-3 z-40">
                     <ScrollToTop />

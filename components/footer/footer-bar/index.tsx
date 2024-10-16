@@ -14,7 +14,7 @@ const FooterBar = () => {
             <IconLink activeIcon={GoHomeFill} icon={GoHome} href='/' text={'Home'}/>
             <IconLink activeIcon={PiSquaresFourFill } icon={PiSquaresFour} href='/categories' text={'Categories'}/>
             <IconLink activeIcon={IoIosHeart} icon={IoIosHeartEmpty} href='/wishlist' text={'Wishlist'}/>
-            <IconLink activeIcon={RiAccountCircleFill} icon={RiAccountCircleLine} href='/account' text={'Account'}/>
+            <IconLink activeIcon={RiAccountCircleFill} icon={RiAccountCircleLine} href='/auth' text={'Account'}/>
             <IconLink activeIcon={HiShoppingCart} icon={HiOutlineShoppingCart} href='/cart' text={'Cart'}/>
         </div>
     );
