@@ -5,6 +5,7 @@ import '@/stylesheets/globals.css';
 import ScrollToTop from '@/components/ui/features/ScrollToTop';
 import { WhatsAppSolid } from '@/public/svgs';
 import { Toaster } from 'react-hot-toast';
+import { ClerkLoading, ClerkLoaded, ClerkProvider } from '@clerk/nextjs';
 
 const customFont = localFont({
     src: [
@@ -36,15 +37,19 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${customFont.variable} antialiased`}>
             <body>
-                <Toaster />
-                <NextTopLoader color="#FF5956" height={3} showSpinner={false} />
-                <div className="fixed bottom-24 lg:bottom-10 right-3 cursor-pointer flex flex-col gap-3 z-40">
-                    <ScrollToTop />
-                    <a href={`https://api.whatsapp.com/send?phone=%2B918826207080`} target="_blank" rel="noopener noreferrer" className="">
-                        <WhatsAppSolid height="2.5rem" width="2.5rem" fillColor="#FF5956" strokeWidth="0" strokeColor="currentColor"/>
-                    </a>
-                </div>
-                {children}
+                <ClerkProvider>
+                    <ClerkLoaded>
+                        <Toaster />
+                        <NextTopLoader color="#FF5956" height={3} showSpinner={false} />
+                        <div className="fixed bottom-24 lg:bottom-10 right-3 cursor-pointer flex flex-col gap-3 z-40">
+                            <ScrollToTop />
+                            <a href={`https://api.whatsapp.com/send?phone=%2B918826207080`} target="_blank" rel="noopener noreferrer" className="">
+                                <WhatsAppSolid height="2.5rem" width="2.5rem" fillColor="#FF5956" strokeWidth="0" strokeColor="currentColor"/>
+                            </a>
+                        </div>
+                        {children}
+                    </ClerkLoaded>
+                </ClerkProvider>
             </body>
         </html>
     );

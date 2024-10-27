@@ -1,13 +1,21 @@
+'use client';
+
 import React from 'react';
 import Section from '@/components/ui/features/Section';
 import Container from '@/components/ui/features/Container';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/auth-tabs';
 import LoginForm from '@/components/auth/login';
 import RegisterForm from '@/components/auth/register';
-import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
+import { useAuth } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 const AuthPage = () => {
+    const { isSignedIn } = useAuth();
+    const router = useRouter();
+    if (isSignedIn) {
+        router.push('/');
+    }
     return (
         <Section>
             <Container className="mt-10 md:mt-20 mb-20 flex flex-col gap-7">
@@ -39,12 +47,6 @@ const AuthPage = () => {
                         </TabsContent>
                     </div>
                 </Tabs>
-                <div>
-                    <div className="border rounded-sm p-3 flex items-center justify-center gap-2 hover:cursor-pointer hover:bg-[#D9C1A3] hover:border-white transition duration-100">
-                        <FcGoogle size={20} />
-                        <span className="font-medium">Continue with Google</span>
-                    </div>
-                </div>
                 <div className='max-w-[500px] text-center text-[12px]'>
                     <span className=''>
                         By continuing, you have read and agree to our {` `}

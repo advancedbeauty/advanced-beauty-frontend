@@ -10,23 +10,37 @@ import { BsCart2 } from 'react-icons/bs';
 import Menu from '@/components/navbar/lower-navbar/menu';
 import IconLink from '@/components/footer/footer-bar/icon-link';
 import { BiSolidOffer } from 'react-icons/bi';
-// import axiosApi from '@/utils/refresh-interceptors';
-// import LogoutBtn from './logout-btn';
+import { useAuth, useClerk } from '@clerk/nextjs';
+import { toast, Toaster } from 'react-hot-toast';
 
 const LowerNavbar = () => {
-    // const [loggedIn, setLoggedIn] = useState(false);
+    const { isSignedIn } = useAuth();
+    const { signOut } = useClerk();
 
-    // useEffect(() => {
-    //     const logginFunc = async () => {
-    //         const logginResposne = await axiosApi.get('/auth/check/isloggedin');
-    //         if (logginResposne.data.success === 'true') {
-    //             setLoggedIn(false);
-    //         } else {
-    //             setLoggedIn(true);
-    //         }
-    //     };
-    //     logginFunc();
-    // }, []);
+    const handleLogout = () => {
+        toast((t) => (
+            <div>
+                <p>Are you sure you want to logout?</p>
+                <div>
+                    <button
+                        className="mr-2 px-2 py-1 bg-red-500 text-white rounded"
+                        onClick={() => {
+                            signOut();
+                            toast.dismiss(t.id);
+                        }}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        className="px-2 py-1 bg-gray-300 rounded"
+                        onClick={() => toast.dismiss(t.id)}
+                    >
+                        No
+                    </button>
+                </div>
+            </div>
+        ), { duration: Infinity });
+    };
 
     return (
         <Section className="py-2 shadow bg-[#111111] text-white">
@@ -41,24 +55,24 @@ const LowerNavbar = () => {
                     <Link href={'/cart'} className="bg-[#D9C1A3] p-2 rounded-full text-neutral-950">
                         <BsCart2 size={20} strokeWidth={0.2} />
                     </Link>
-                    <Link
-                            href={'/auth'}
+                    {isSignedIn ? (
+                        <button
+                            onClick={handleLogout}
                             className="bg-[#D9C1A3] rounded-[2px] p-2 text-neutral-950 font-semibold text-sm"
                         >
-                            <span>LOGIN</span>
-                        </Link>
-                    {/* {loggedIn ? (
+                            <span>LOGOUT</span>
+                        </button>
+                    ) : (
                         <Link
                             href={'/auth'}
                             className="bg-[#D9C1A3] rounded-[2px] p-2 text-neutral-950 font-semibold text-sm"
                         >
                             <span>LOGIN</span>
                         </Link>
-                    ) : (
-                        <LogoutBtn />
-                    )} */}
+                    )}
                 </div>
             </Container>
+            <Toaster position="top-center" />
         </Section>
     );
 };
