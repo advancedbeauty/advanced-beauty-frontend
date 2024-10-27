@@ -5,7 +5,7 @@ import '@/stylesheets/globals.css';
 import ScrollToTop from '@/components/ui/features/ScrollToTop';
 import { WhatsAppSolid } from '@/public/svgs';
 import { Toaster } from 'react-hot-toast';
-import { ClerkLoading, ClerkLoaded, ClerkProvider } from '@clerk/nextjs';
+import { ClerkLoaded, ClerkProvider } from '@clerk/nextjs';
 
 const customFont = localFont({
     src: [

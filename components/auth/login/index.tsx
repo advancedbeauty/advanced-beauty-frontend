@@ -31,7 +31,8 @@ const LoginForm = () => {
             } else {
                 toast.error('Login failed. Please check your credentials.');
             }
-        } catch (error) {
+        } catch (err) {
+            console.error('Login error:', err);
             toast.error('An error occurred during login. Please try again.');
         }
     };
@@ -45,7 +46,8 @@ const LoginForm = () => {
                 redirectUrl: "/sso-callback",
                 redirectUrlComplete: "/",
             });
-        } catch (error) {
+        } catch (err) {
+            console.error('Google login error:', err);
             toast.error('An error occurred during Google login. Please try again.');
         }
     };
