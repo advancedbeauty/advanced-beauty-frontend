@@ -65,10 +65,8 @@ const Footer = () => {
                         <div>
                             <span className='font-semibold text-lg'>Address</span>
                             <div className='flex flex-col mt-3 text-neutral-400'>
-                                <span>House no 120, Mata Wali Gali,</span>
-                                <span>near agarwal dharmshala,</span>
-                                <span>Molar band Extension, Mithapur,</span>
-                                <span>New Delhi, Delhi 110044</span>
+                                <span>2/ 23 Ramesh Nagar,</span>
+                                <span>West Delhi 15 2 block,</span>
                             </div>
                         </div>
                     </div>

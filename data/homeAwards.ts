@@ -1,20 +1,20 @@
 export const HomeAwardsData = [
     {
-        src: '/awards/awards1.png',
+        src: '/section-images/awardsSection/awards1.png',
     },
     { 
-        src: '/awards/awards2.png',
+        src: '/section-images/awardsSection/awards2.png',
     },
     { 
-        src: '/awards/awards3.png',
+        src: '/section-images/awardsSection/awards3.png',
     },
     { 
-        src: '/awards/awards4.png', 
+        src: '/section-images/awardsSection/awards4.png', 
     },
     { 
-        src: '/awards/awards5.png', 
+        src: '/section-images/awardsSection/awards5.png', 
     },
     { 
-        src: '/awards/awards6.png', 
+        src: '/section-images/awardsSection/awards6.png', 
     },
 ]

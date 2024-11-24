@@ -7,13 +7,13 @@ const HomeCertificatesSection = () => {
     return (
         <Section
             className="py-8 sm:py-16 bg-fixed bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/images/certificateSection/parallax_certificate.jpg')" }}
+            style={{ backgroundImage: "url('/section-images/certificateSection/parallax_certificate.jpg')" }}
         >
             <Container className="w-full">
                 <div className="flex flex-col md:flex-row gap-4 md:gap-10">
                     {/* <div className="w-full md:w-1/2"> */}
                         <Image
-                            src="/certificates/pankhri.jpg"
+                            src="/section-images/certificateSection/pankhri.jpg"
                             alt="Certificate 1"
                             width={1000}
                             height={1000}

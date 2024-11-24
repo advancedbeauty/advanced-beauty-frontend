@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import styles from '@/stylesheets/HeroSection.module.css';
+import styles from '@/components/home/hero-section/style.module.css';
 import { Roboto_Slab } from 'next/font/google';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -18,20 +18,20 @@ interface SlideImage {
 }
 
 const slides: SlideImage[] = [
-    { 
-        src: '/images/heroSection/SLIDE_01.jpg', 
+    {
+        src: '/section-images/heroSection/SLIDE_01.jpg',
         heading: 'Art Manicure',
-        alt: 'Art Manicure Slide 1'
+        alt: 'Art Manicure Slide 1',
     },
-    { 
-        src: '/images/heroSection/SLIDE_03.jpg', 
+    {
+        src: '/section-images/heroSection/SLIDE_03.jpg',
         heading: 'Art Manicure',
-        alt: 'Art Manicure Slide 2'
+        alt: 'Art Manicure Slide 2',
     },
-    { 
-        src: '/images/heroSection/SLIDE_04.jpg', 
+    {
+        src: '/section-images/heroSection/SLIDE_04.jpg',
         heading: 'Art Manicure',
-        alt: 'Art Manicure Slide 3'
+        alt: 'Art Manicure Slide 3',
     },
 ];
 
@@ -63,19 +63,21 @@ const HeroSection: React.FC = () => {
                         className="object-cover"
                     />
                     <div className={`${styles.content} flex flex-col w-full items-center text-white`}>
-                        <span className={`${styles.heroSubTitleOne} select-none font-medium font-quentin leading-tight z-[5] text-[#D9C1A3]`}>
+                        <span
+                            className={`${styles.heroSubTitleOne} select-none font-medium font-quentin leading-tight z-[5] text-[#D9C1A3]`}
+                        >
                             nail fashion
                         </span>
                         <h1 className={`${styles.heroMainTitle} ${roboslab.className} uppercase leading-tight`}>
                             {slide.heading}
                         </h1>
-                        <div className='mt-4 flex flex-col sm:flex-row gap-2 overflow-hidden'>
+                        <div className="mt-4 flex flex-col sm:flex-row gap-2 overflow-hidden">
                             <div>Best quality.</div>
-                            <div>Always in trend.</div> 
+                            <div>Always in trend.</div>
                             <div>Creative color styles.</div>
                         </div>
-                        <Link 
-                            href={'/'} 
+                        <Link
+                            href={'/'}
                             className={`${styles.buyNowButton} border border-white hover:bg-white hover:text-black transition-all duration-300 mt-10 px-5 py-3 flex items-center gap-2 text-xs sm:text-sm lg:text-base font-medium`}
                         >
                             Buy Now

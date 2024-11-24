@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import NextTopLoader from 'nextjs-toploader';
-import '@/stylesheets/globals.css';
-import ScrollToTop from '@/components/ui/features/ScrollToTop';
-import { WhatsAppSolid } from '@/public/svgs';
-import { Toaster } from 'react-hot-toast';
-import { ClerkLoaded, ClerkProvider } from '@clerk/nextjs';
+import './globals.css';
+import { getCurrentUser } from '@/actions/auth/getCurrentUser';
+import ClientInitializer from '@/components/ui/features/ClientInitializer';
 
 const customFont = localFont({
     src: [
@@ -29,27 +27,18 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const currentUser = await getCurrentUser();
     return (
-        <html lang="en" className={`${customFont.variable} antialiased`}>
-            <body>
-                <ClerkProvider>
-                    <ClerkLoaded>
-                        <Toaster />
-                        <NextTopLoader color="#FF5956" height={3} showSpinner={false} />
-                        <div className="fixed bottom-24 lg:bottom-10 right-3 cursor-pointer flex flex-col gap-3 z-40">
-                            <ScrollToTop />
-                            <a href={`https://api.whatsapp.com/send?phone=%2B918826207080`} target="_blank" rel="noopener noreferrer" className="">
-                                <WhatsAppSolid height="2.5rem" width="2.5rem" fillColor="#FF5956" strokeWidth="0" strokeColor="currentColor"/>
-                            </a>
-                        </div>
-                        {children}
-                    </ClerkLoaded>
-                </ClerkProvider>
+        <html lang="en">
+            <body className={`${customFont.variable} antialiased`}>
+                <ClientInitializer initialUser={currentUser} />
+                <NextTopLoader color="#FF5956" height={3} showSpinner={false} />
+                {children}
             </body>
         </html>
     );

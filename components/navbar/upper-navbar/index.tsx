@@ -1,6 +1,6 @@
+import React from 'react';
 import Container from '@/components/ui/features/Container';
 import Section from '@/components/ui/features/Section';
-import React from 'react';
 
 interface UpperNavbarProps {
     className?: string;

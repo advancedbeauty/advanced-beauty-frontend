@@ -1,12 +1,14 @@
 import React from 'react';
-import { ReviewsData } from '@/data/reviewsData';
 import ReviewsCard from '@/components/home/review-section/reviews-card';
 import CustomCarousel from '@/components/ui/custom-carousel';
 import Container from '@/components/ui/features/Container';
 import Section from '@/components/ui/features/Section';
+import { fetchReviews } from '@/actions/admin/review/review.actions';
 
-const HomeReviewSection: React.FC = () => {
-    const carouselItems = ReviewsData.map((card) => <ReviewsCard key={card.name} {...card} />);
+async function HomeReviewSection() {
+    const reviewsData = await fetchReviews();
+    const isLoading = !reviewsData;
+    const carouselItems = reviewsData?.reviews?.map((card) => <ReviewsCard key={card.name} {...card} isLoading={isLoading} />) ?? [];
 
     return (
         <Section className="py-20 bg-[#FBF1EA]">

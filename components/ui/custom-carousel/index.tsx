@@ -1,9 +1,17 @@
 'use client';
-
 import React, { useCallback, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Autoplay, EffectFade, EffectFlip, EffectCoverflow, EffectCube, EffectCards, EffectCreative } from 'swiper/modules';
+import {
+    Navigation,
+    Autoplay,
+    EffectFade,
+    EffectFlip,
+    EffectCoverflow,
+    EffectCube,
+    EffectCards,
+    EffectCreative,
+} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
@@ -18,24 +26,22 @@ interface CustomCarouselProps {
     loop?: boolean;
     breakpoints?: { [width: number]: { slidesPerView: number } };
     className?: string;
-    autoplay?: boolean | { delay: number; disableOnInteraction?: boolean, pauseOnMouseEnter?: boolean, stopOnLastSlide?: boolean; };
+    autoplay?:
+        | boolean
+        | { delay: number; disableOnInteraction?: boolean; pauseOnMouseEnter?: boolean; stopOnLastSlide?: boolean };
     effect?: 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip';
     speed?: number;
 }
 
-const NavigationButton: React.FC<{ direction: 'prev' | 'next'; onClick: () => void }> = React.memo(
-    ({ direction, onClick }) => (
-        <button
-            className="p-3 transition-colors border w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-xl duration-300 hover:bg-opacity-90"
-            onClick={onClick}
-            aria-label={`${direction === 'prev' ? 'Previous' : 'Next'} slide`}
-        >
-            {direction === 'prev' ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
-        </button>
-    )
+const NavigationButton: React.FC<{ direction: 'prev' | 'next'; onClick: () => void }> = ({ direction, onClick }) => (
+    <button
+        className="p-3 transition-colors border w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-xl duration-300 hover:bg-opacity-90"
+        onClick={onClick}
+        aria-label={`${direction === 'prev' ? 'Previous' : 'Next'} slide`}
+    >
+        {direction === 'prev' ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
+    </button>
 );
-
-NavigationButton.displayName = 'NavigationButton';
 
 const CustomCarousel: React.FC<CustomCarouselProps> = ({
     items,
@@ -70,7 +76,16 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
                     onBeforeInit={(swiper) => {
                         swiperRef.current = swiper;
                     }}
-                    modules={[Navigation, Autoplay, EffectFade, EffectFlip, EffectCoverflow, EffectCube, EffectCards, EffectCreative]}
+                    modules={[
+                        Navigation,
+                        Autoplay,
+                        EffectFade,
+                        EffectFlip,
+                        EffectCoverflow,
+                        EffectCube,
+                        EffectCards,
+                        EffectCreative,
+                    ]}
                     autoplay={autoplay}
                     effect={effect}
                     speed={speed}
@@ -94,4 +109,4 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
     );
 };
 
-export default React.memo(CustomCarousel);
+export default CustomCarousel;
