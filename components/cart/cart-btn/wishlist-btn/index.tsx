@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
 import useWishlist from '@/hooks/use-wishlist';
 
 interface WishlistButtonProps {

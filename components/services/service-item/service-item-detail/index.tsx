@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar } from '@/components/ui/calendar';
-import { CalendarIcon, ShoppingCart } from 'lucide-react';
+import { CalendarIcon } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { format, isBefore, isToday, addHours, set } from 'date-fns';
 import Container from '@/components/ui/features/Container';
@@ -224,8 +224,6 @@ export default function ServiceItemDetailClient({ service }: ServiceItemDetailCl
                                     <div className="flex gap-4 pt-4">
                                         <CartButton
                                             listingId={service.id}
-                                            selectedDate={selectedDate}
-                                            selectedTime={selectedTime}
                                         />
                                         <Button
                                             type="submit"

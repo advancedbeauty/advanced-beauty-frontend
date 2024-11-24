@@ -5,7 +5,7 @@ import Section from '../ui/features/Section';
 import Container from '../ui/features/Container';
 import useCurrentUserStore from '@/store/auth/currentUserStore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { AlertCircle, Loader2, ShoppingCart, Heart, Trash2, Plus, Minus } from 'lucide-react';
+import { AlertCircle, Loader2, ShoppingCart, Plus, Minus } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import useCartItems from '@/hooks/use-cart-items';
@@ -30,12 +30,10 @@ interface CartItemActionsProps {
         type: string;
         quantity?: number;
     };
-    onSave: (itemId: string) => void;
-    onRemove: (itemId: string) => void;
     onQuantityChange: (itemId: string, newQuantity: number) => void;
 }
 
-const CartItemActions: React.FC<CartItemActionsProps> = ({ item, onSave, onRemove, onQuantityChange }) => {
+const CartItemActions: React.FC<CartItemActionsProps> = ({ item, onQuantityChange }) => {
     return (
         <div className="mt-4 flex items-center justify-between">
             {item.type === 'shop' && (
@@ -135,7 +133,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onSave, onRemove, onQuantityC
                         )}
                     </div>
                 </div>
-                <CartItemActions item={item} onSave={onSave} onRemove={onRemove} onQuantityChange={onQuantityChange} />
+                <CartItemActions item={item} onQuantityChange={onQuantityChange} />
             </div>
         </div>
     </Card>
@@ -149,7 +147,7 @@ interface OrderSummaryProps {
     onRefresh: () => void;
 }
 
-const OrderSummary: React.FC<OrderSummaryProps> = ({ subtotal, totalDiscount, shippingFee, total, onRefresh }) => (
+const OrderSummary: React.FC<OrderSummaryProps> = ({ subtotal, totalDiscount, shippingFee, total }) => (
     <Card className="sticky top-4">
         <CardHeader>
             <CardTitle className="flex items-center gap-2">

@@ -64,7 +64,7 @@ export async function fetchFAQs() {
     try {
         const faqs = await prisma.faq.findMany({
             orderBy: {
-                createdAt: 'desc',
+                createdAt: 'asc',
             },
         });
         return { success: true, faqs };

@@ -5,11 +5,9 @@ import UseCart from '@/hooks/use-cart';
 
 interface CartButtonProps {
     listingId: string;
-    selectedDate?: Date;
-    selectedTime?: string;
 }
 
-const CartButton: React.FC<CartButtonProps> = ({ listingId, selectedDate, selectedTime }) => {
+const CartButton: React.FC<CartButtonProps> = ({ listingId }) => {
     const { hasCarted, toggleCart } = UseCart({ listingId });
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
