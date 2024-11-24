@@ -85,7 +85,7 @@ interface CartItemProps {
     onQuantityChange: (itemId: string, newQuantity: number) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item, onSave, onRemove, onQuantityChange }) => (
+const CartItem: React.FC<CartItemProps> = ({ item, onQuantityChange }) => (
     <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
         <div className="flex gap-6">
             <Link

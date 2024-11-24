@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { RiArrowUpDoubleFill } from 'react-icons/ri';
 
 const ScrollToTop = () => {
     const [showScroll, setShowScroll] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
 
-    const checkScrollTop = () => {
+    const checkScrollTop = useCallback(() => {
         const winScroll = document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
@@ -19,7 +19,7 @@ const ScrollToTop = () => {
         } else if (showScroll && window.scrollY <= 400) {
             setShowScroll(false);
         }
-    };
+    }, [showScroll]);
 
     const scrollTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
