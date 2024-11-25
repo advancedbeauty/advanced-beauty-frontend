@@ -74,28 +74,61 @@ export async function getCartItems() {
                 items: [],
             };
         }
-        // Fetch all service items from wishlist
-        const serviceItems = await prisma.service.findMany({
-            where: {
-                id: {
-                    in: currentUser.cartIds,
+
+        // Fetch all items in parallel
+        const [serviceItems, shopItems] = await Promise.all([
+            prisma.service.findMany({
+                where: {
+                    id: {
+                        in: currentUser.cartIds,
+                    },
                 },
-            },
-        });
-        // Fetch all shop items from cart
-        const shopItems = await prisma.shop.findMany({
-            where: {
-                id: {
-                    in: currentUser.cartIds,
+                select: {
+                    id: true,
+                    imageSrc: true,
+                    category: true,
+                    title: true,
+                    description: true,
+                    price: true,
+                    discount: true,
+                    otherInfo: true,
                 },
-            },
-        });
-        // Combine service and shop items into a single array
-        const combinedItems = [...serviceItems, ...shopItems];
+            }),
+            prisma.shop.findMany({
+                where: {
+                    id: {
+                        in: currentUser.cartIds,
+                    },
+                },
+                select: {
+                    id: true,
+                    imageSrc: true,
+                    category: true,
+                    title: true,
+                    description: true,
+                    price: true,
+                    discount: true,
+                    quantity: true,
+                    otherInfo: true,
+                },
+            }),
+        ]);
+
+        // Transform and combine items
+        const transformedItems = [
+            ...serviceItems.map((item) => ({
+                ...item,
+                type: 'service' as const,
+            })),
+            ...shopItems.map((item) => ({
+                ...item,
+                type: 'shop' as const,
+            })),
+        ];
 
         return {
             success: true,
-            items: combinedItems,
+            items: transformedItems,
             cartIds: currentUser.cartIds,
         };
     } catch (error) {

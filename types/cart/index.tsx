@@ -1,4 +1,4 @@
-export interface ServiceItem {
+export interface BaseItem {
     id: string;
     imageSrc: string;
     category: string;
@@ -6,21 +6,16 @@ export interface ServiceItem {
     description: string;
     price: number;
     discount: number;
-    type: 'service';
     otherInfo?: any;
 }
 
-export interface ShopItem {
-    id: string;
-    imageSrc: string;
-    category: string;
-    title: string;
-    description: string;
-    price: number;
-    discount: number;
-    quantity: number;
+export interface ServiceItem extends BaseItem {
+    type: 'service';
+}
+
+export interface ShopItem extends BaseItem {
     type: 'shop';
-    otherInfo?: any;
+    quantity: number;
 }
 
 export type CartItem = ServiceItem | ShopItem;
