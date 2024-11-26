@@ -7,9 +7,9 @@ import { Skeleton } from '@/components/ui/skeleton';
 import ServiceCard from '@/components/home/service-section/service-card';
 
 interface PageProps {
-    params: Promise<{
+    params: {
         category: string;
-    }>;
+    };
 }
 
 const formatUrlToTitle = (urlString: string) => {
@@ -55,9 +55,7 @@ function ServiceItemLoading() {
 }
 
 async function GetServiceItem({ params }: PageProps) {
-    // Wait for params to be resolved
-    const resolvedParams = await params;
-    const categoryTitle = formatUrlToTitle(resolvedParams.category);
+    const categoryTitle = formatUrlToTitle(params.category);
 
     // Fetch category to verify it exists
     const categoriesResponse = await fetchServiceCategories();

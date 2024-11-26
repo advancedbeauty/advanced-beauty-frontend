@@ -13,7 +13,9 @@ const formatUrlToTitle = (urlString: string) => {
 };
 
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-    const formatedTitle = formatUrlToTitle(params.category);
+    // Await params if it's a Promise
+    const awaitedParams = await params;
+    const formatedTitle = formatUrlToTitle(awaitedParams.category);
     return {
         title: `${formatedTitle} | Services`,
         description:
@@ -22,15 +24,14 @@ export async function generateMetadata({ params }: { params: { category: string 
 }
 
 interface PageProps {
-    params: Promise<{
+    params: {
         category: string;
-    }>;
+    };
 }
 
 const Page = async ({ params }: PageProps) => {
-    // Create a Promise that resolves with the params
-    const paramsPromise = Promise.resolve(params);
-    return <GetServiceItem params={paramsPromise} />;
+    const awaitedParams = await params;
+    return <GetServiceItem params={awaitedParams} />;
 };
 
 export default Page;
