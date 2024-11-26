@@ -30,14 +30,14 @@ export async function generateMetadata({
 }
 
 interface PageProps {
-    params: {
+    params: Promise<{
         category: string;
-    };
+    }>;
 }
 
 const Page = async ({ params }: PageProps) => {
-    // Use Promise.resolve to ensure params is a promise
-    const resolvedParams = await Promise.resolve(params);
+    // Await the params to resolve the promise
+    const resolvedParams = await params;
     return <GetServiceItem params={resolvedParams} />;
 };
 
