@@ -2,6 +2,12 @@ import React from 'react';
 import { Metadata } from 'next';
 import GetServiceItem from '@/components/services/service-item';
 
+interface PageProps {
+    params: Promise<{
+        category: string;
+    }>;
+}
+
 // Utility function for formatting
 const formatUrlToTitle = (urlString: string) => {
     return urlString
@@ -13,13 +19,9 @@ const formatUrlToTitle = (urlString: string) => {
         .join(' ');
 };
 
-export async function generateMetadata({ 
-    params 
-}: { 
-    params: { category: string } 
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     // Use Promise.resolve to ensure params is a promise
-    const resolvedParams = await Promise.resolve(params);
+    const resolvedParams = await params;
     const formatedTitle = formatUrlToTitle(resolvedParams.category);
     
     return {
@@ -27,12 +29,6 @@ export async function generateMetadata({
         description:
             'Explore luxurious beauty services at Advanced Beauty. From rejuvenating facials to expert hair treatments, indulge in personalized services that enhance your natural beauty and well-being.',
     };
-}
-
-interface PageProps {
-    params: Promise<{
-        category: string;
-    }>;
 }
 
 const Page = async ({ params }: PageProps) => {
