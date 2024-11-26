@@ -88,9 +88,9 @@ const Wishlist = () => {
                 <div className="space-y-6 min-h-[500px]">
                     <Tabs defaultValue="services" className="w-full">
                         <div className="flex flex-col md:flex-row md:justify-between gap-5 mg:gap-20">
-                            <MainTitle heading='Wishlist' subheading='Discover and revisit your dream items anytime'/>
-                            <div className='flex flex-wrap gap-4 max-w-[573px] w-full'>
-                                <TabsList className="grid w-full max-w-md grid-cols-2">
+                            <MainTitle heading="Wishlist" subheading="Discover and revisit your dream items anytime" />
+                            <div className="flex flex-wrap gap-4 max-w-[573px] w-full">
+                                <TabsList className="grid w-full max-w-md grid-cols-2 bg-gray-100">
                                     <TabsTrigger
                                         value="services"
                                         className="data-[state=active]:bg-[#D9C1A3] data-[state=active]:text-neutral-950"
