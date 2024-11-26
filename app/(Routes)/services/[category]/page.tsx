@@ -1,7 +1,8 @@
 import React from 'react';
+import { Metadata } from 'next';
 import GetServiceItem from '@/components/services/service-item';
-import type { Metadata } from 'next';
 
+// Utility function for formatting
 const formatUrlToTitle = (urlString: string) => {
     return urlString
         .split('-')
@@ -12,10 +13,15 @@ const formatUrlToTitle = (urlString: string) => {
         .join(' ');
 };
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-    // Await params if it's a Promise
-    const awaitedParams = await params;
-    const formatedTitle = formatUrlToTitle(awaitedParams.category);
+export async function generateMetadata({ 
+    params 
+}: { 
+    params: { category: string } 
+}): Promise<Metadata> {
+    // Use Promise.resolve to ensure params is a promise
+    const resolvedParams = await Promise.resolve(params);
+    const formatedTitle = formatUrlToTitle(resolvedParams.category);
+    
     return {
         title: `${formatedTitle} | Services`,
         description:
@@ -30,8 +36,9 @@ interface PageProps {
 }
 
 const Page = async ({ params }: PageProps) => {
-    const awaitedParams = await params;
-    return <GetServiceItem params={awaitedParams} />;
+    // Use Promise.resolve to ensure params is a promise
+    const resolvedParams = await Promise.resolve(params);
+    return <GetServiceItem params={resolvedParams} />;
 };
 
 export default Page;
