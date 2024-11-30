@@ -5,16 +5,12 @@ import { useCartStore } from '@/store/cart/cartStore';
 import { toast } from 'react-hot-toast';
 
 interface CartItemQuantityProps {
-    listingId: string;
-    itemType: 'service' | 'shop';
     currentQuantity?: number;
     cartItemId?: string;
     availableQuantity?: number;
 }
 
 const CartItemQuantity: React.FC<CartItemQuantityProps> = ({
-    listingId,
-    itemType,
     currentQuantity = 1,
     cartItemId,
     availableQuantity,
@@ -44,6 +40,7 @@ const CartItemQuantity: React.FC<CartItemQuantityProps> = ({
             } catch (error) {
                 // Revert local state if update fails
                 setLocalQuantity(currentQuantity);
+                console.log(error);
                 toast.error('Failed to update quantity');
             } finally {
                 setIsUpdating(false);

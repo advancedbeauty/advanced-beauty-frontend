@@ -91,8 +91,6 @@ const CartItem: React.FC<CartItemProps> = ({ item, selectedDate, selectedTime, c
                     <div className="mt-4 md:mt-7 flex flex-wrap gap-4 items-center justify-between w-full">
                         <div className="flex items-center gap-2">
                             <CartItemQuantity
-                                listingId={item.id}
-                                itemType={'service' || 'shop'}
                                 cartItemId={cartItemId}
                                 currentQuantity={quantity}
                                 availableQuantity={'quantity' in item ? item.quantity : 25}
