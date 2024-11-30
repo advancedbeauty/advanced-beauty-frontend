@@ -5,13 +5,13 @@ import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
-// export type FAQ = {
-//     id: string;
-//     question: string;
-//     answer: string;
-//     createdAt: Date;
-//     updatedAt: Date;
-// };
+export type FAQ = {
+    id: string;
+    question: string;
+    answer: string;
+    createdAt: Date;
+    updatedAt: Date;
+};
 
 export async function createFAQ(data: { question: string; answer: string }) {
     try {
