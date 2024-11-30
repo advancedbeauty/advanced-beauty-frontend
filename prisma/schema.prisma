@@ -36,7 +36,6 @@ model User {
   password      String?
   image         String?
   wishlistIds   String[]  @db.ObjectId
-  cartIds       String[]  @db.ObjectId
   isAdmin       Boolean   @default(false)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -45,6 +44,7 @@ model User {
   sessions   Session[]
   Order      Order[]
   Newsletter newsletter[]
+  cart       cart[]
 }
 
 model Account {
@@ -85,17 +85,18 @@ model serviceCategory {
 }
 
 model service {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   imageSrc    String
   category    String
-  title       String   @unique
+  title       String     @unique
   description String
   price       Float
   discount    Float
   otherInfo   Json?
-  type        String   @default("service")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  type        String     @default("service")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  cartItem    cartItem[]
 }
 
 model shopCategory {
@@ -108,18 +109,42 @@ model shopCategory {
 }
 
 model shop {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   imageSrc    String
   category    String
-  title       String   @unique
+  title       String     @unique
   description String
   price       Float
   discount    Float
   otherInfo   Json?
   quantity    Int
-  type        String   @default("shop")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  type        String     @default("shop")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  cartItem    cartItem[]
+}
+
+model cart {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cartItem cartItem[]
+}
+
+model cartItem {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  cartId   String @db.ObjectId
+  itemId   String @db.ObjectId // References either service or shop item
+  quantity Int    @default(1)
+
+  // For service appointments
+  appointmentDate DateTime?
+  appointmentTime String?
+
+  cart    cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  service service? @relation(fields: [itemId], references: [id], onDelete: Cascade) // Optional relation to service
+  shop    shop?    @relation(fields: [itemId], references: [id], onDelete: Cascade) // Optional relation to shop
 }
 
 model Order {
@@ -144,7 +169,7 @@ model OrderItem {
   itemId     String   @db.ObjectId // References either service or shop item
   itemType   ItemType // To distinguish between service and shop items
   quantity   Int      @default(1)
-  price      Float // Price at the time of order
+  price      Float // Price at the time of or der
   discount   Float // Discount at the time of order
   finalPrice Float // Final price after discount
 

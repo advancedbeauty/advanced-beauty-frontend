@@ -77,7 +77,7 @@ const HeroSection: React.FC = () => {
                             <div>Creative color styles.</div>
                         </div>
                         <Link
-                            href={'/'}
+                            href={'#shopSectionHome'}
                             className={`${styles.buyNowButton} border border-white hover:bg-white hover:text-black transition-all duration-300 mt-10 px-5 py-3 flex items-center gap-2 text-xs sm:text-sm lg:text-base font-medium`}
                         >
                             Buy Now

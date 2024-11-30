@@ -2,21 +2,9 @@
 
 import { PrismaClient } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
+import { ServiceItem } from '@/types/service/service-item';
 
 const prisma = new PrismaClient();
-
-export type ServiceItem = {
-    id: string;
-    title: string;
-    imageSrc: string;
-    description: string;
-    price: number;
-    discount: number;
-    category: string;
-    type: string;
-    createdAt: Date;
-    updatedAt: Date;
-};
 
 export async function createServiceItem(data: {
     title: string;

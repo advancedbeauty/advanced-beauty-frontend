@@ -141,7 +141,7 @@ const Categories = () => {
                                         href="/shop"
                                         className="w-full h-full max-h-[50px] bg-gray-100 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center font-medium"
                                     >
-                                        View All Services
+                                        View All Shop 
                                     </Link>
                                 </div>
                             </div>

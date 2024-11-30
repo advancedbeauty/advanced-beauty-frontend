@@ -1,30 +1,25 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import useCartStore from '@/store/cart/cartStore';
+import { useCartStore } from '@/store/cart/cartStore';
 import useCurrentUserStore from '@/store/auth/currentUserStore';
-import { addToCart, removeFromCart } from '@/actions/cart/cart.actions';
 
 interface UseCartProps {
     listingId: string;
+    itemType?: 'service' | 'shop';
+    quantity?: number;
+    appointmentDate?: Date;
+    appointmentTime?: string;
 }
 
-const useCart = ({ listingId }: UseCartProps) => {
-    const router = useRouter();
+const useCart = ({ listingId, itemType = 'shop', quantity = 1, appointmentDate, appointmentTime }: UseCartProps) => {
     const { currentUser } = useCurrentUserStore();
-    const { cartIds, setCartIds, addItem, removeItem } = useCartStore();
-    const initialSyncDone = useRef(false);
-
-    useEffect(() => {
-        if (currentUser?.cartIds && !initialSyncDone.current) {
-            setCartIds(currentUser.cartIds);
-            initialSyncDone.current = true;
-        }
-    }, [currentUser?.cartIds, setCartIds]);
+    const router = useRouter();
+    const { cart, addItem, removeItem } = useCartStore();
 
     const hasCarted = useMemo(() => {
-        return cartIds.includes(listingId);
-    }, [cartIds, listingId]);
+        return cart.some((item) => item.itemId === listingId);
+    }, [cart, listingId]);
 
     const toggleCart = useCallback(
         async (e: React.MouseEvent<HTMLDivElement>) => {
@@ -34,30 +29,21 @@ const useCart = ({ listingId }: UseCartProps) => {
             }
             try {
                 if (hasCarted) {
-                    removeItem(listingId);
-                    const result = await removeFromCart(listingId);
-                    if (!result.success) {
-                        addItem(listingId);
-                        toast.error(result.error || 'Failed to remove from cart');
-                        return;
+                    const cartItemToRemove = cart.find((item) => item.itemId === listingId);
+
+                    if (cartItemToRemove) {
+                        await removeItem(cartItemToRemove.id);
+                        toast.success('Removed from cart');
                     }
-                    toast.success('Removed from cart');
                 } else {
-                    addItem(listingId);
-                    const result = await addToCart(listingId);
-                    if (!result.success) {
-                        removeItem(listingId);
-                        toast.error(result.error || 'Failed to add to cart');
-                        return;
-                    }
+                    await addItem(listingId, itemType, quantity, appointmentDate, appointmentTime);
                     toast.success('Added to cart');
                 }
             } catch (error) {
-                hasCarted ? addItem(listingId) : removeItem(listingId);
-                toast.error('Something went wrong');
+                toast.error(error instanceof Error ? error.message : 'Something went wrong');
             }
         },
-        [currentUser, hasCarted, listingId, router, addItem, removeItem]
+        [hasCarted, listingId, cart, addItem, removeItem, itemType, quantity, appointmentDate, appointmentTime]
     );
 
     return { hasCarted, toggleCart };

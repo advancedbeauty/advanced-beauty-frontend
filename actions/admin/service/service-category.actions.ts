@@ -2,17 +2,9 @@
 
 import { PrismaClient } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
+import { ServiceCategory } from '@/types/service/service-category';
 
 const prisma = new PrismaClient();
-
-export type ServiceCategory = {
-    id: string;
-    title: string;
-    imageSrc: string;
-    description: string;
-    createdAt: Date;
-    updatedAt: Date;
-};
 
 export async function createServiceCategory(data: { title: string; imageSrc: string; description: string }) {
     try {

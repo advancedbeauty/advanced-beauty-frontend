@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
+import NextTopLoader from 'nextjs-toploader';
 import { getCurrentUser } from '@/actions/auth/getCurrentUser';
 import ClientInitializer from '@/components/ui/features/ClientInitializer';
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         template: '%s',
     },
     description:
-        'Experience premium salon services from the comfort of your home in Noida, Greater Noida, and Delhi NCR. Skip the hassle of traveling to a salon—our expert team brings professional treatments right to your doorstep. Enjoy the luxury of personalized beauty care without stepping out!',
+        'Experience premium salon services from the comfort of your home in Noida, Greater Noida, and Delhi NCR. Skip the hassle of traveling to a salon, our expert team brings professional treatments right to your doorstep. Enjoy the luxury of personalized beauty care without stepping out!',
     icons: {
         icon: '/icon.png',
     },

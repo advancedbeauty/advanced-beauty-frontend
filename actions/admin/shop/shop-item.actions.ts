@@ -16,6 +16,7 @@ export type ShopItem = {
     discount: number;
     quantity: number; // Added quantity
     category: string;
+    type: string;
     createdAt: Date;
     updatedAt: Date;
 };

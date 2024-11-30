@@ -6,15 +6,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar } from '@/components/ui/calendar';
-import { CalendarIcon, MinusIcon, PlusIcon } from 'lucide-react';
+import { CalendarIcon } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { format, isBefore, isToday, addHours, set } from 'date-fns';
 import Container from '@/components/ui/features/Container';
 import Section from '@/components/ui/features/Section';
 import Image from 'next/image';
 import HeartButton from '@/components/wishlist/heart-btn';
-import { ServiceItem } from '@/actions/admin/service/service-item.actions';
 import CartButton from '@/components/cart/cart-btn';
+import { ServiceItem } from '@/types/service/service-item';
 
 interface ServiceItemDetailClientProps {
     service: ServiceItem;
@@ -71,7 +71,6 @@ export default function ServiceItemDetailClient({ service }: ServiceItemDetailCl
     const [selectedDate, setSelectedDate] = useState<Date>();
     const [selectedTime, setSelectedTime] = useState<string>();
     const [calendarOpen, setCalendarOpen] = useState(false);
-    const [quantity, setQuantity] = useState(1);
 
     const hasDiscount = service.discount > 0;
     const discountAmount = hasDiscount ? Math.round((service.price * service.discount) / 100) : 0;
@@ -85,18 +84,6 @@ export default function ServiceItemDetailClient({ service }: ServiceItemDetailCl
         setCalendarOpen(false); // Close the calendar popover after date selection
     };
 
-    const decrementQuantity = () => {
-        if (quantity > 1) {
-            setQuantity((prev) => prev - 1);
-        }
-    };
-
-    const incrementQuantity = () => {
-        if (quantity < 20) {
-            setQuantity((prev) => prev + 1);
-        }
-    };
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Add your booking logic here
@@ -107,7 +94,7 @@ export default function ServiceItemDetailClient({ service }: ServiceItemDetailCl
             <Container className="w-full mx-auto px-4 sm:px-6 lg:px-8 mb-20">
                 <Card className="overflow-hidden border-none shadow-xl p-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12">
-                        <div className="relative md:pt-6">
+                        <div className="relative md:py-6">
                             <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
                                 <Image
                                     src={service.imageSrc}
@@ -234,33 +221,14 @@ export default function ServiceItemDetailClient({ service }: ServiceItemDetailCl
                                         )}
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-700">
-                                            Select Number of People
-                                        </label>
-                                        <div className="flex items-center gap-4">
-                                            <Button
-                                                variant="outline"
-                                                size="icon"
-                                                onClick={decrementQuantity}
-                                                disabled={quantity <= 1}
-                                            >
-                                                <MinusIcon className="h-4 w-4" />
-                                            </Button>
-                                            <span className="text-xl font-medium">{quantity}</span>
-                                            <Button
-                                                variant="outline"
-                                                size="icon"
-                                                onClick={incrementQuantity}
-                                                disabled={quantity >= 20}
-                                            >
-                                                <PlusIcon className="h-4 w-4" />
-                                            </Button>
-                                        </div>
-                                    </div>
-
                                     <div className="flex gap-4 pt-4">
-                                        <CartButton listingId={service.id} />
+                                        <CartButton 
+                                            listingId={service.id} 
+                                            disabled={!selectedDate || !selectedTime}
+                                            selectedDate={selectedDate}
+                                            selectedTime={selectedTime}
+                                            itemType='service'
+                                        />
                                         <Button
                                             type="submit"
                                             className="flex-1"

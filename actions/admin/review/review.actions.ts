@@ -1,18 +1,10 @@
 'use server';
 
+import { Review } from '@/types/review';
 import { PrismaClient } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
-
-export type Review = {
-    id: string;
-    name: string;
-    imageSrc: string;
-    reviewText: string;
-    createdAt: Date;
-    updatedAt: Date;
-};
 
 export async function createReview(data: { name: string; imageSrc: string; reviewText: string }) {
     try {

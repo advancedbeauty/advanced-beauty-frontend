@@ -24,7 +24,7 @@ const HomeShopSection = async () => {
         )) || [];
 
     return (
-        <Section className="py-20 bg-[#FBF1EA]">
+        <Section className="py-20 bg-[#FBF1EA]" id='shopSectionHome'>
             <Container className="w-full flex flex-col gap-10 py-8">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <MainTitle heading="Our Products" subheading="Buy your favourite items" />

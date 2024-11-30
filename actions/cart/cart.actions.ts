@@ -1,142 +1,141 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
-import { getCurrentUser } from '../auth/getCurrentUser';
+import { auth } from '@/auth';
+import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 
-const prisma = new PrismaClient();
+export async function addToCart(
+    itemId: string,
+    itemType: 'service' | 'shop',
+    quantity: number = 1,
+    appointmentDate?: Date,
+    appointmentTime?: string
+) {
+    const session = await auth();
 
-export async function addToCart(listingId: string) {
-    const currentUser = await getCurrentUser();
-
-    if (!currentUser) {
-        return { success: false, error: 'Not logged in' };
+    if (!session?.user?.id) {
+        throw new Error('You must be logged in to add items to cart');
     }
 
-    if (!listingId || typeof listingId !== 'string') {
-        return { success: false, error: 'Invalid ID' };
+    // Find or create user's cart
+    let cart = await prisma.cart.findFirst({
+        where: { userId: session.user.id },
+    });
+
+    if (!cart) {
+        cart = await prisma.cart.create({
+            data: { userId: session.user.id },
+        });
     }
 
-    try {
-        const user = await prisma.user.update({
-            where: { id: currentUser.id },
+    // Check if item already exists in cart
+    const existingCartItem = await prisma.cartItem.findFirst({
+        where: {
+            cartId: cart.id,
+            itemId: itemId,
+        },
+    });
+
+    if (existingCartItem) {
+        // Update existing cart item
+        await prisma.cartItem.update({
+            where: { id: existingCartItem.id },
             data: {
-                cartIds: {
-                    push: listingId,
-                },
+                quantity: existingCartItem.quantity + quantity,
+                ...(appointmentDate && { appointmentDate }),
+                ...(appointmentTime && { appointmentTime }),
             },
         });
-
-        revalidatePath('/cart');
-        return { success: true, cartIds: user.cartIds };
-    } catch (error) {
-        console.error('Failed to add item to cart:', error);
-        return { success: false, error: 'Failed to add item to cart' };
-    }
-}
-
-export async function removeFromCart(listingId: string) {
-    const currentUser = await getCurrentUser();
-
-    if (!currentUser) {
-        return { success: false, error: 'Not logged in' };
-    }
-
-    if (!listingId || typeof listingId !== 'string') {
-        return { success: false, error: 'Invalid ID' };
-    }
-
-    try {
-        const user = await prisma.user.update({
-            where: { id: currentUser.id },
+    } else {
+        // Create new cart item
+        await prisma.cartItem.create({
             data: {
-                cartIds: {
-                    set: currentUser?.cartIds?.filter((id) => id !== listingId),
-                },
+                cartId: cart.id,
+                itemId,
+                quantity,
+                ...(appointmentDate && { appointmentDate }),
+                ...(appointmentTime && { appointmentTime }),
             },
         });
-
-        revalidatePath('/cart');
-        return { success: true, cartIds: user.cartIds };
-    } catch (error) {
-        console.error('Failed to remove item from cart:', error);
-        return { success: false, error: 'Failed to remove item from cart' };
     }
+
+    revalidatePath('/cart');
 }
 
-export async function getCartItems() {
-    try {
-        const currentUser = await getCurrentUser();
-        if (!currentUser) {
-            return {
-                success: false,
-                error: 'Not logged in',
-                items: [],
-            };
-        }
+export async function removeFromCart(cartItemId: string) {
+    const session = await auth();
 
-        // Fetch all items in parallel
-        const [serviceItems, shopItems] = await Promise.all([
-            prisma.service.findMany({
-                where: {
-                    id: {
-                        in: currentUser.cartIds,
-                    },
-                },
-                select: {
-                    id: true,
-                    imageSrc: true,
-                    category: true,
-                    title: true,
-                    description: true,
-                    price: true,
-                    discount: true,
-                    otherInfo: true,
-                },
-            }),
-            prisma.shop.findMany({
-                where: {
-                    id: {
-                        in: currentUser.cartIds,
-                    },
-                },
-                select: {
-                    id: true,
-                    imageSrc: true,
-                    category: true,
-                    title: true,
-                    description: true,
-                    price: true,
-                    discount: true,
-                    quantity: true,
-                    otherInfo: true,
-                },
-            }),
-        ]);
-
-        // Transform and combine items
-        const transformedItems = [
-            ...serviceItems.map((item) => ({
-                ...item,
-                type: 'service' as const,
-            })),
-            ...shopItems.map((item) => ({
-                ...item,
-                type: 'shop' as const,
-            })),
-        ];
-
-        return {
-            success: true,
-            items: transformedItems,
-            cartIds: currentUser.cartIds,
-        };
-    } catch (error) {
-        console.error('Failed to fetch cart items:', error);
-        return {
-            success: false,
-            error: 'Failed to fetch cart items',
-            items: [],
-        };
+    if (!session?.user?.id) {
+        throw new Error('You must be logged in to modify cart');
     }
+
+    await prisma.cartItem.delete({
+        where: {
+            id: cartItemId,
+        },
+    });
+
+    revalidatePath('/cart');
+}
+
+export async function updateCartItemQuantity(cartItemId: string, quantity: number) {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+        throw new Error('You must be logged in to modify cart');
+    }
+
+    if (quantity <= 0) {
+        await removeFromCart(cartItemId);
+        return;
+    }
+
+    await prisma.cartItem.update({
+        where: { id: cartItemId },
+        data: { quantity },
+    });
+
+    revalidatePath('/cart');
+}
+
+export async function getCart() {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+        return null;
+    }
+    
+    const cart = await prisma.cart.findFirst({
+        where: { userId: session.user.id },
+        include: {
+            cartItem: {
+                include: {
+                    service: true,
+                    shop: true,
+                },
+            },
+        },
+    });
+
+    return cart;
+}
+
+export async function clearCart() {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+        throw new Error('You must be logged in to clear cart');
+    }
+
+    const cart = await prisma.cart.findFirst({
+        where: { userId: session.user.id },
+    });
+
+    if (cart) {
+        await prisma.cartItem.deleteMany({
+            where: { cartId: cart.id },
+        });
+    }
+
+    revalidatePath('/cart');
 }
