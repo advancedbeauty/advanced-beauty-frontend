@@ -7,10 +7,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Loader2Icon, EditIcon, TrashIcon, UploadIcon, XIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import { createReview, updateReview, deleteReview, fetchReviews, Review } from '@/actions/admin/review/review.actions';
+import { createReview, updateReview, deleteReview, fetchReviews } from '@/actions/admin/review/review.actions';
 import { uploadImageToDrive } from '@/actions/google-drive-upload/googleDriveUpload.actions';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+import { Review } from '@/types/review';
 
 interface ApiResponse {
     success: boolean;
