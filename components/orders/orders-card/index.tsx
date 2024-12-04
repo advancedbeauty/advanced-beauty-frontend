@@ -36,8 +36,8 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
                     </p>
                 </div>
                 <div className="flex flex-col items-end space-y-2">
-                    <Badge variant={statusVariants[order.status]}>{order.status}</Badge>
-                    <Badge variant={paymentStatusVariants[order.paymentStatus]}>{order.paymentStatus}</Badge>
+                    <Badge>{order.status}</Badge>
+                    <Badge>{order.paymentStatus}</Badge>
                 </div>
             </div>
 
