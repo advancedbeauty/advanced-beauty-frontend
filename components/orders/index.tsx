@@ -38,7 +38,7 @@ const OrdersPage = () => {
                     </div>
                 ) : orders.length === 0 ? (
                     <div className="text-center space-y-4">
-                        <p className="text-gray-500">You haven't placed any orders yet.</p>
+                        <p className="text-gray-500">You haven&apos;t placed any orders yet.</p>
                         <Button asChild>
                             <Link href="/shop">Shop Now</Link>
                         </Button>

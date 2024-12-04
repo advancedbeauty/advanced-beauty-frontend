@@ -10,7 +10,6 @@ import { createOffer, updateOffer, deleteOffer, fetchOffers, Offer } from '@/act
 import { uploadImageToDrive } from '@/actions/google-drive-upload/googleDriveUpload.actions';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
-import { formatPrice } from '@/lib/formatPrice';
 
 interface ApiResponse {
     success: boolean;

@@ -11,8 +11,7 @@ import Link from 'next/link';
 
 const OrderConfirmationPage = () => {
     const { currentOrder } = useOrderStore();
-    const router = useRouter();
-    const [countdown, setCountdown] = useState(7);
+    const router = useRouter(); 
     const [isClient, setIsClient] = useState(false);
 
     // Use useLayoutEffect for initial client-side render check
