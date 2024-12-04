@@ -229,13 +229,13 @@ export default function ServiceItemDetailClient({ service }: ServiceItemDetailCl
                                             selectedTime={selectedTime}
                                             itemType='service'
                                         />
-                                        <Button
+                                        {/* <Button
                                             type="submit"
                                             className="flex-1"
                                             disabled={!selectedDate || !selectedTime}
                                         >
                                             Book Now
-                                        </Button>
+                                        </Button> */}
                                     </div>
                                 </form>
                             </CardContent>

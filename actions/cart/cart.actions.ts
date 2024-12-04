@@ -98,13 +98,31 @@ export async function updateCartItemQuantity(cartItemId: string, quantity: numbe
     revalidatePath('/cart');
 }
 
+export async function updateCartBookingInfo(cartItemId: string, appointmentDate: Date, appointmentTime: string) {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+        throw new Error('You must be logged in to clear cart');
+    }
+
+    const cart = await prisma.cartItem.update({
+        where: {id: cartItemId},
+        data: {
+            appointmentDate,
+            appointmentTime
+        },
+    });
+
+    revalidatePath('/cart');
+}
+
 export async function getCart() {
     const session = await auth();
 
     if (!session?.user?.id) {
         return null;
     }
-    
+
     const cart = await prisma.cart.findFirst({
         where: { userId: session.user.id },
         include: {
@@ -139,3 +157,42 @@ export async function clearCart() {
 
     revalidatePath('/cart');
 }
+
+export async function applyOfferCode(code: string) {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+        throw new Error('You must be logged in to clear cart');
+    }
+
+    // Validate offer code
+    const offer = await prisma.offer.findUnique({
+        where: { code: code.toUpperCase() },
+    });
+
+    if (!offer) {
+        throw new Error('Invalid offer code');
+    }
+
+    // Calculate cart subtotal
+    const cart = await getCart();
+    if (!cart || cart.cartItem.length === 0) {
+        throw new Error('Cart is empty');
+    }
+
+    const subtotal = cart.cartItem.reduce((sum, item) => {
+        const price = item.service?.price || item.shop?.price || 0;
+        return sum + price * item.quantity;
+    }, 0);
+
+    // Calculate discount
+    const discountAmount = Math.round((subtotal * offer.discount) / 100);
+    const finalDiscountAmount = Math.min(discountAmount, offer.maxAmount);
+
+    return {
+        code: offer.code,
+        discountAmount: finalDiscountAmount,
+        discountPercentage: offer.discount,
+    };
+}
+

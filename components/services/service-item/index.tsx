@@ -1,11 +1,13 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { fetchServiceCategories, ServiceCategory } from '@/actions/admin/service/service-category.actions';
-import { fetchServiceItems, ServiceItem } from '@/actions/admin/service/service-item.actions';
+import { fetchServiceCategories } from '@/actions/admin/service/service-category.actions';
+import { fetchServiceItems } from '@/actions/admin/service/service-item.actions';
 import Container from '@/components/ui/features/Container';
 import Section from '@/components/ui/features/Section';
 import { Skeleton } from '@/components/ui/skeleton';
 import ServiceCard from '@/components/home/service-section/service-card';
+import { ServiceCategory } from '@/types/service/service-category';
+import { ServiceItem } from '@/types/service/service-item';
 
 // Utility function for formatting
 const formatUrlToTitle = (urlString: string) => {

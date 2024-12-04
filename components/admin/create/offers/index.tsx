@@ -4,45 +4,29 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
 import { Loader2Icon, EditIcon, TrashIcon, UploadIcon, XIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import {
-    createServiceCategory,
-    updateServiceCategory,
-    deleteServiceCategory,
-    fetchServiceCategories,
-} from '@/actions/admin/service/service-category.actions';
+import { createOffer, updateOffer, deleteOffer, fetchOffers, Offer } from '@/actions/admin/offers/offers.actions';
 import { uploadImageToDrive } from '@/actions/google-drive-upload/googleDriveUpload.actions';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
-import { ServiceCategory } from '@/types/service/service-category';
+import { formatPrice } from '@/lib/formatPrice';
 
 interface ApiResponse {
     success: boolean;
-    category?: ServiceCategory;
-    categories?: ServiceCategory[];
+    offer?: Offer;
+    offers?: Offer[];
     error?: string;
 }
 
-const ServiceCategoryManagement = () => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+const OfferManagement = () => {
+    const [code, setCode] = useState('');
+    const [discount, setDiscount] = useState('');
     const [imageSrc, setImageSrc] = useState('');
+    const [maxAmount, setMaxAmount] = useState('');
     const [imagePreview, setImagePreview] = useState<string | null>(null);
-    const [categories, setCategories] = useState<ServiceCategory[]>([]);
-    const [editingCategory, setEditingCategory] = useState<ServiceCategory | null>(null);
+    const [offers, setOffers] = useState<Offer[]>([]);
+    const [editingOffer, setEditingOffer] = useState<Offer | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState('');
     const [isLoading, setIsLoading] = useState({
@@ -54,22 +38,23 @@ const ServiceCategoryManagement = () => {
     });
     const itemsPerPage = 10;
     const fileInputRef = useRef<HTMLInputElement>(null);
+
     useEffect(() => {
-        const loadCategories = async () => {
+        const loadOffers = async () => {
             setIsLoading((prev) => ({ ...prev, fetch: true }));
             try {
-                const result = await fetchServiceCategories();
-                if (result.success && result.categories) {
-                    setCategories(result.categories);
+                const result = await fetchOffers();
+                if (result.success && result.offers) {
+                    setOffers(result.offers);
                 }
             } catch (error) {
                 console.log(error);
-                toast.error('Failed to fetch categories');
+                toast.error('Failed to fetch offers');
             } finally {
                 setIsLoading((prev) => ({ ...prev, fetch: false }));
             }
         };
-        loadCategories();
+        loadOffers();
     }, []);
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +71,6 @@ const ServiceCategoryManagement = () => {
 
         try {
             const result = await uploadImageToDrive(file);
-
             if (result.success && result.url) {
                 setImageSrc(result.url);
                 toast.success('Image uploaded successfully');
@@ -102,46 +86,65 @@ const ServiceCategoryManagement = () => {
     };
 
     const handleSubmit = async () => {
-        if (!title.trim() || !description.trim() || !imageSrc) {
-            toast.error('Please fill all fields');
+        // Validate inputs
+        if (!code.trim()) {
+            toast.error('Please enter an offer code');
+            return;
+        }
+
+        const discountValue = parseFloat(discount);
+        if (isNaN(discountValue) || discountValue <= 0 || discountValue > 100) {
+            toast.error('Please enter a valid discount percentage (1-100)');
+            return;
+        }
+
+        const maxAmountValue = parseInt(maxAmount);
+        if (isNaN(maxAmountValue) || maxAmountValue <= 0) {
+            toast.error('Please enter a valid maximum amount limit');
+            return;
+        }
+
+        if (!imageSrc) {
+            toast.error('Please upload an image');
             return;
         }
 
         setIsLoading((prev) => ({ ...prev, create: true }));
 
         try {
-            const lowerCaseTitle = title.toLowerCase();
-            const categoryData = {
-                title: lowerCaseTitle,
-                description: description,
+            const offerData = {
+                code: code.toUpperCase(),
+                discount: discountValue,
                 imageSrc,
+                maxAmount: maxAmountValue
             };
 
             let result: ApiResponse;
-            if (editingCategory) {
-                result = await updateServiceCategory(editingCategory.id, categoryData);
+            if (editingOffer) {
+                result = await updateOffer(editingOffer.id, offerData);
                 if (result.success) {
-                    setCategories((prev) =>
-                        prev.map((cat) => (cat.id === editingCategory.id ? { ...cat, ...categoryData } : cat))
+                    setOffers((prev) =>
+                        prev.map((offer) => (offer.id === editingOffer.id ? { ...offer, ...offerData } : offer))
                     );
-                    toast.success('Category updated successfully');
-                    setEditingCategory(null);
+                    toast.success('Offer updated successfully');
+                    setEditingOffer(null);
                 } else {
-                    toast.error('Failed to update category');
+                    toast.error(result.error || 'Failed to update offer');
                 }
             } else {
-                result = await createServiceCategory(categoryData);
-                if (result.success && result.category) {
-                    setCategories((prev) => [result.category!, ...prev]);
-                    toast.success('Category created successfully');
+                result = await createOffer(offerData);
+                if (result.success && result.offer) {
+                    setOffers((prev) => [result.offer!, ...prev]);
+                    toast.success('Offer created successfully');
                 } else {
-                    toast.error('Failed to create category');
+                    toast.error(result.error || 'Failed to create offer');
                 }
             }
 
             // Reset form
-            setTitle('');
-            setDescription('');
+            setCode('');
+            setDiscount('');
+            setMaxAmount('');
             setImageSrc('');
             setImagePreview(null);
         } catch (error) {
@@ -152,18 +155,20 @@ const ServiceCategoryManagement = () => {
         }
     };
 
-    const handleEdit = (category: ServiceCategory) => {
-        setEditingCategory(category);
-        setTitle(category.title);
-        setDescription(category.description);
-        setImageSrc(category.imageSrc);
-        setImagePreview(category.imageSrc);
+    const handleEdit = (offer: Offer) => {
+        setEditingOffer(offer);
+        setCode(offer.code);
+        setDiscount(offer.discount.toString());
+        setMaxAmount(offer.maxAmount.toString());
+        setImageSrc(offer.imageSrc || '');
+        setImagePreview(offer.imageSrc || '');
     };
 
     const handleCancelEdit = () => {
-        setEditingCategory(null);
-        setTitle('');
-        setDescription('');
+        setEditingOffer(null);
+        setCode('');
+        setDiscount('');
+        setMaxAmount('');
         setImageSrc('');
         setImagePreview(null);
     };
@@ -171,12 +176,12 @@ const ServiceCategoryManagement = () => {
     const handleDelete = async (id: string) => {
         setIsLoading((prev) => ({ ...prev, delete: id }));
         try {
-            const result = await deleteServiceCategory(id);
+            const result = await deleteOffer(id);
             if (result.success) {
-                setCategories(categories.filter((cat) => cat.id !== id));
-                toast.success('Category deleted successfully');
+                setOffers(offers.filter((offer) => offer.id !== id));
+                toast.success('Offer deleted successfully');
             } else {
-                toast.error('Failed to delete category');
+                toast.error('Failed to delete offer');
             }
         } catch (error) {
             console.log(error);
@@ -187,28 +192,36 @@ const ServiceCategoryManagement = () => {
     };
 
     // Pagination & Search Logic
-    const filteredCategories = categories.filter((category) =>
-        category.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    const paginatedCategories = filteredCategories.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-    const totalPages = Math.ceil(filteredCategories.length / itemsPerPage);
+    const filteredOffers = offers.filter((offer) => offer.code.toLowerCase().includes(searchQuery.toLowerCase()));
+    const paginatedOffers = filteredOffers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const totalPages = Math.ceil(filteredOffers.length / itemsPerPage);
 
     return (
         <div className="w-full p-6 space-y-6">
             <Card className="w-full">
                 <CardHeader>
-                    <CardTitle>{editingCategory ? 'Edit' : 'Create'} Service Category</CardTitle>
+                    <CardTitle>{editingOffer ? 'Edit' : 'Create'} Offer</CardTitle>
                     <CardDescription>
-                        {editingCategory ? 'Modify' : 'Add'} a service category with title, description, and image
+                        {editingOffer ? 'Modify' : 'Add'} an offer with code, discount, and image
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        <Input placeholder="Category Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                        <Textarea
-                            placeholder="Category Description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                        <Input placeholder="Offer Code" value={code} onChange={(e) => setCode(e.target.value)} />
+                        <Input
+                            placeholder="Discount Percentage"
+                            type="number"
+                            min="1"
+                            max="100"
+                            value={discount}
+                            onChange={(e) => setDiscount(e.target.value)}
+                        />
+                        <Input
+                            placeholder="Maximum Amount"
+                            type="number"
+                            min="1"
+                            value={maxAmount}
+                            onChange={(e) => setMaxAmount(e.target.value)}
                         />
                         <div>
                             <input
@@ -250,17 +263,17 @@ const ServiceCategoryManagement = () => {
                     <Button
                         className="w-full"
                         onClick={handleSubmit}
-                        disabled={!title || !description || !imageSrc || isLoading.create}
+                        disabled={!code || !discount || !imageSrc || isLoading.create}
                     >
                         {isLoading.create ? (
                             <Loader2Icon className="mr-2 animate-spin" />
-                        ) : editingCategory ? (
-                            'Update Category'
+                        ) : editingOffer ? (
+                            'Update Offer'
                         ) : (
-                            'Create Category'
+                            'Create Offer'
                         )}
                     </Button>
-                    {editingCategory && (
+                    {editingOffer && (
                         <Button variant="outline" onClick={handleCancelEdit}>
                             <XIcon className="mr-2 h-4 w-4" /> Cancel
                         </Button>
@@ -270,11 +283,11 @@ const ServiceCategoryManagement = () => {
 
             <Card className="w-full">
                 <CardHeader>
-                    <CardTitle>Service Categories</CardTitle>
-                    <CardDescription>List of existing service categories</CardDescription>
+                    <CardTitle>Offers</CardTitle>
+                    <CardDescription>List of existing offers</CardDescription>
                     <div className="mt-4">
                         <Input
-                            placeholder="Search categories..."
+                            placeholder="Search Offers..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -291,67 +304,50 @@ const ServiceCategoryManagement = () => {
                                 <TableHeader>
                                     <TableRow>
                                         <TableHead className="w-1/6">Image</TableHead>
-                                        <TableHead className="w-1/4">Title</TableHead>
-                                        <TableHead className="w-1/3">Description</TableHead>
-                                        <TableHead className="w-1/6">Created At</TableHead>
+                                        <TableHead className="w-1/4">Offer Code</TableHead>
+                                        <TableHead className="w-1/4">Discount</TableHead>
+                                        <TableHead className="w-1/4">MaxAmount</TableHead>
+                                        <TableHead className="w-1/4">Created At</TableHead>
                                         <TableHead className="w-1/6 text-right">Actions</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {paginatedCategories.map((category) => (
-                                        <TableRow key={category.id}>
+                                    {paginatedOffers.map((offer) => (
+                                        <TableRow key={offer.id}>
                                             <TableCell>
                                                 <Image
-                                                    src={category.imageSrc}
-                                                    alt={category.title}
+                                                    src={offer.imageSrc || ''}
+                                                    alt={offer.code}
                                                     width={1000}
                                                     height={1000}
                                                     className="w-16 h-16 object-cover rounded-md"
                                                 />
                                             </TableCell>
-                                            <TableCell>{category.title}</TableCell>
-                                            <TableCell>{category.description}</TableCell>
-                                            <TableCell>{new Date(category.createdAt).toLocaleDateString()}</TableCell>
-                                            <TableCell className="text-right space-x-2">
+                                            <TableCell>{offer.code}</TableCell>
+                                            <TableCell>{offer.discount}%</TableCell>
+                                            <TableCell>{offer.maxAmount}</TableCell>
+                                            <TableCell>{new Date(offer.createdAt).toLocaleDateString()}</TableCell>
+                                            <TableCell className="text-right space-x-2 flex">
                                                 <Button
                                                     variant="outline"
                                                     size="icon"
-                                                    onClick={() => handleEdit(category)}
+                                                    onClick={() => handleEdit(offer)}
                                                     disabled={isLoading.edit}
                                                 >
                                                     <EditIcon className="h-4 w-4" />
                                                 </Button>
-                                                <AlertDialog>
-                                                    <AlertDialogTrigger asChild>
-                                                        <Button
-                                                            variant="destructive"
-                                                            size="icon"
-                                                            disabled={isLoading.delete === category.id}
-                                                        >
-                                                            {isLoading.delete === category.id ? (
-                                                                <Loader2Icon className="animate-spin h-4 w-4" />
-                                                            ) : (
-                                                                <TrashIcon className="h-4 w-4" />
-                                                            )}
-                                                        </Button>
-                                                    </AlertDialogTrigger>
-                                                    <AlertDialogContent>
-                                                        <AlertDialogHeader>
-                                                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                                                            <AlertDialogDescription>
-                                                                This will permanently delete the service category.
-                                                            </AlertDialogDescription>
-                                                        </AlertDialogHeader>
-                                                        <AlertDialogFooter>
-                                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                                            <AlertDialogAction
-                                                                onClick={() => handleDelete(category.id)}
-                                                            >
-                                                                Delete
-                                                            </AlertDialogAction>
-                                                        </AlertDialogFooter>
-                                                    </AlertDialogContent>
-                                                </AlertDialog>
+                                                <Button
+                                                    variant="destructive"
+                                                    size="icon"
+                                                    onClick={() => handleDelete(offer.id)}
+                                                    disabled={isLoading.delete === offer.id}
+                                                >
+                                                    {isLoading.delete === offer.id ? (
+                                                        <Loader2Icon className="animate-spin h-4 w-4" />
+                                                    ) : (
+                                                        <TrashIcon className="h-4 w-4" />
+                                                    )}
+                                                </Button>
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -385,4 +381,4 @@ const ServiceCategoryManagement = () => {
     );
 };
 
-export default ServiceCategoryManagement;
+export default OfferManagement;

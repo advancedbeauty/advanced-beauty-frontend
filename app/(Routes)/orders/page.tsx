@@ -1,8 +1,8 @@
 import React from 'react';
-import OffersPage from '@/components/offers';
+import Orders from '@/components/orders';
 
 const page = () => {
-    return <OffersPage />;
+    return <Orders />;
 };
 
 export default page;

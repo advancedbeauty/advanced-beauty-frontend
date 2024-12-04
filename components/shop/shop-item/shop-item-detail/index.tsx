@@ -90,9 +90,9 @@ export default function ShopItemDetailClient({ item }: ShopItemDetailClientProps
                                 <div className="space-y-6">
                                     <div className="flex gap-4">
                                         <CartButton listingId={item.id} itemType='shop'/>
-                                        <Button className="flex-1" disabled={item.quantity === 0}>
+                                        {/* <Button className="flex-1" disabled={item.quantity === 0}>
                                             Buy Now
-                                        </Button>
+                                        </Button> */}
                                     </div>
                                 </div>
                             </CardContent>

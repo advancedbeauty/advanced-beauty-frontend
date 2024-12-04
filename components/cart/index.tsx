@@ -10,12 +10,15 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import MainTitle from '../ui/title/main-title';
 import CartItem from './cart-item';
-import OrderSummary from './order-summary';
 import { useCartStore } from '@/store/cart/cartStore';
+import OfferCode from './offer-code';
+import { useCalculateTotals } from '@/hooks/use-calculateTotal';
+import PriceDetails from './price-details';
 
 const Cart = () => {
     const { currentUser } = useCurrentUserStore();
     const { cart, isLoading } = useCartStore();
+    const calculatePrice = useCalculateTotals();
 
     if (!currentUser) {
         return (
@@ -63,10 +66,15 @@ const Cart = () => {
                             </CardTitle>
                             <CardDescription>Add items to your cart to begin shopping</CardDescription>
                         </CardHeader>
-                        <CardContent className="flex justify-center">
+                        <CardContent className="flex justify-center gap-5">
                             <Link href="/">
                                 <Button className="bg-[#D9C1A3] hover:bg-[#c4ac8e] text-neutral-950">
                                     Continue Shopping
+                                </Button>
+                            </Link>
+                            <Link href="/orders">
+                                <Button className="bg-[#D9C1A3] hover:bg-[#c4ac8e] text-neutral-950">
+                                    Go to orders
                                 </Button>
                             </Link>
                         </CardContent>
@@ -76,38 +84,13 @@ const Cart = () => {
         );
     }
 
-    const calculateTotals = () => {
-        const subtotal = cart.reduce((sum, item) => {
-            const price = item.service?.price || item.shop?.price || 0;
-            return sum + price * item.quantity;
-        }, 0);
-
-        const totalDiscount = cart.reduce((sum, item) => {
-            const price = item.service?.price || item.shop?.price || 0;
-            const discount = item.service?.discount || item.shop?.discount || 0;
-            return sum + (price * item.quantity * discount) / 100;
-        }, 0);
-
-        const shippingFee = subtotal > 1000 ? 100 : 150;
-        const total = Math.round(subtotal - totalDiscount + shippingFee);
-
-        return {
-            subtotal: Math.round(subtotal),
-            totalDiscount: Math.round(totalDiscount),
-            shippingFee,
-            total,
-        };
-    };
-
-    const totals = calculateTotals();
-
     return (
         <Section className="py-10 md:py-20">
             <Container className="w-full">
                 <div className="flex items-center justify-between flex-wrap">
                     <MainTitle heading="Cart" subheading="Your Shopping Cart is Almost Ready" />
                     <Link
-                        href="/order"
+                        href="/orders"
                         className="w-fit bg-[#D9C1A3] hover:bg-[#c4ac8e] text-neutral-950 mt-6 font-medium py-2 px-5 rounded transition-colors"
                     >
                         Your Orders
@@ -128,8 +111,9 @@ const Cart = () => {
                             );
                         })}
                     </div>
-                    <div className="lg:max-w-[350px] w-full">
-                        <OrderSummary {...totals} />
+                    <div className="lg:max-w-[350px] w-full flex flex-col gap-5">
+                        <OfferCode />
+                        <PriceDetails {...calculatePrice} />
                     </div>
                 </div>
             </Container>

@@ -65,7 +65,7 @@ const DashboardSideBar = () => {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Manage services</SidebarGroupLabel>
+                    <SidebarGroupLabel>Manage items</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <Link
                             href={'/admin/create/service-category'}
@@ -82,9 +82,6 @@ const DashboardSideBar = () => {
                             Service item
                         </Link>
                     </SidebarGroupContent>
-                </SidebarGroup>
-                <SidebarGroup>
-                    <SidebarGroupLabel>Manage shop</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <Link
                             href={'/admin/create/shop/shop-category'}
@@ -94,8 +91,19 @@ const DashboardSideBar = () => {
                         </Link>
                     </SidebarGroupContent>
                     <SidebarGroupContent>
-                        <Link href={'/admin/create/shop/shop-item'} className={getLinkClassName('/admin/create/shop/shop-item')}>
+                        <Link
+                            href={'/admin/create/shop/shop-item'}
+                            className={getLinkClassName('/admin/create/shop/shop-item')}
+                        >
                             Shop item
+                        </Link>
+                    </SidebarGroupContent>
+                    <SidebarGroupContent>
+                        <Link
+                            href={'/admin/create/offers'}
+                            className={getLinkClassName('/admin/create/offers')}
+                        >
+                            Offers
                         </Link>
                     </SidebarGroupContent>
                 </SidebarGroup>
@@ -137,10 +145,7 @@ const DashboardSideBar = () => {
                         </Link>
                     </SidebarGroupContent>
                     <SidebarGroupContent>
-                        <Link
-                            href={'/admin/create/faq'}
-                            className={getLinkClassName('/admin/create/faq')}
-                        >
+                        <Link href={'/admin/create/faq'} className={getLinkClassName('/admin/create/faq')}>
                             FAQ
                         </Link>
                     </SidebarGroupContent>

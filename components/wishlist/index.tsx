@@ -12,6 +12,7 @@ import useCurrentUserStore from '@/store/auth/currentUserStore';
 import useWishlistItems from '@/hooks/use-wishlist-items';
 import ServiceCard from '../home/service-section/service-card';
 import MainTitle from '../ui/title/main-title';
+import ShopCard from '../home/shop-section/shop-card';
 
 const Wishlist = () => {
     const { currentUser } = useCurrentUserStore();
@@ -131,7 +132,7 @@ const Wishlist = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                 {items.shopItems.map((item) => (
                                     <div key={item.id} className="group relative">
-                                        <ServiceCard
+                                        <ShopCard
                                             id={item.id}
                                             title={item.title}
                                             price={item.price}

@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Section from '../ui/features/Section';
 import Container from '../ui/features/Container';
 import ImageCard from '../ui/cards/ImageCard';
-import { fetchServiceCategories, ServiceCategory } from '@/actions/admin/service/service-category.actions';
+import { fetchServiceCategories } from '@/actions/admin/service/service-category.actions';
 import MainTitle from '../ui/title/main-title';
+import { ServiceCategory } from '@/types/service/service-category';
 
 const Services = () => {
     const [categories, setCategories] = useState<ServiceCategory[]>([]);

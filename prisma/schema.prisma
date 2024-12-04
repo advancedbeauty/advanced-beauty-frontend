@@ -133,18 +133,32 @@ model cart {
 }
 
 model cartItem {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  cartId   String @db.ObjectId
-  itemId   String @db.ObjectId // References either service or shop item
-  quantity Int    @default(1)
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  cartId        String  @db.ObjectId
+  itemId        String  @db.ObjectId // References either service or shop item
+  quantity      Int     @default(1)
+  offerCode     String?
+  offerDiscount Float?  @default(0)
 
   // For service appointments
   appointmentDate DateTime?
   appointmentTime String?
 
-  cart    cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  service service? @relation(fields: [itemId], references: [id], onDelete: Cascade) // Optional relation to service
-  shop    shop?    @relation(fields: [itemId], references: [id], onDelete: Cascade) // Optional relation to shop
+  cart      cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  service   service? @relation(fields: [itemId], references: [id], onDelete: Cascade) // Optional relation to service
+  shop      shop?    @relation(fields: [itemId], references: [id], onDelete: Cascade) // Optional relation to shop
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Offer {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  imageSrc  String
+  code      String   @unique
+  discount  Float
+  maxAmount Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Order {
@@ -155,6 +169,7 @@ model Order {
   totalAmount   Float
   paymentStatus PaymentStatus @default(PENDING)
   paymentId     String? // For payment gateway reference
+  address       String
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 

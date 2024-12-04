@@ -1,19 +1,17 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Card } from '@/components/ui/card';
+import { ShopItem } from '@/actions/admin/shop/shop-item.actions';
+import CartItemQuantity from '@/components/cart/cart-btn/cart-item-quantity';
+import RemoveButton from '@/components/cart/cart-btn/remove-btn';
 import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 import { formatPrice } from '@/lib/formatPrice';
 import { formatUrlString } from '@/lib/formatUrlString';
-import WishlistButton from '../cart-btn/wishlist-btn';
-import RemoveButton from '../cart-btn/remove-btn';
 import { ServiceItem } from '@/types/service/service-item';
-import { ShopItem } from '@/actions/admin/shop/shop-item.actions';
 import { format } from 'date-fns';
-import CartItemQuantity from '../cart-btn/cart-item-quantity';
-import EditBookingModal from './edit-item';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
-interface CartItemProps {
+interface CheckoutItemProps {
     item: ServiceItem | ShopItem | null | undefined;
     selectedDate?: Date;
     selectedTime?: string;
@@ -21,9 +19,7 @@ interface CartItemProps {
     quantity?: number; // New prop to pass quantity
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item, selectedDate, selectedTime, cartItemId, quantity = 1 }) => {
-    // Only show edit modal for service items with a date and time
-    const showEditModal = item?.type === 'service' && selectedDate && selectedTime;
+const CheckoutItem: React.FC<CheckoutItemProps> = ({ item, selectedDate, selectedTime, cartItemId, quantity = 1 }) => {
     return (
         <>
             {item && (
@@ -100,15 +96,6 @@ const CartItem: React.FC<CartItemProps> = ({ item, selectedDate, selectedTime, c
                             />
                         </div>
                         <div className="ml-auto flex items-center gap-2">
-                            {showEditModal && (
-                                <EditBookingModal
-                                    cartItemId={cartItemId}
-                                    currentDate={selectedDate}
-                                    currentTime={selectedTime}
-                                    item={item as ServiceItem}
-                                />
-                            )}
-                            <WishlistButton listingId={item.id} />
                             <RemoveButton listingId={item.id} />
                         </div>
                     </div>
@@ -117,5 +104,4 @@ const CartItem: React.FC<CartItemProps> = ({ item, selectedDate, selectedTime, c
         </>
     );
 };
-
-export default CartItem;
+export default CheckoutItem;
