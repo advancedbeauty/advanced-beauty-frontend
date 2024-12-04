@@ -5,9 +5,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Section from '../ui/features/Section';
 import Link from 'next/link';
 import Image from 'next/image';
-import { fetchServiceCategories, ServiceCategory } from '@/actions/admin/service/service-category.actions';
+import { fetchServiceCategories } from '@/actions/admin/service/service-category.actions';
 import ImageCard from '../ui/cards/ImageCard';
 import { fetchShopCategories, ShopCategory } from '@/actions/admin/shop/shop-category.actions';
+import { ServiceCategory } from '@/types/service/service-category';
 
 const Categories = () => {
     const [categories, setCategories] = useState<ServiceCategory[]>([]);
