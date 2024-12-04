@@ -20,16 +20,17 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Loader2Icon, EditIcon, TrashIcon, UploadIcon, XIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { uploadImageToDrive } from '@/actions/google-drive-upload/googleDriveUpload.actions';
-import { fetchServiceCategories, ServiceCategory } from '@/actions/admin/service/service-category.actions';
+import { fetchServiceCategories } from '@/actions/admin/service/service-category.actions';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import {
     createServiceItem,
     deleteServiceItem,
     fetchServiceItems,
-    ServiceItem,
     updateServiceItem,
 } from '@/actions/admin/service/service-item.actions';
+import { ServiceCategory } from '@/types/service/service-category';
+import { ServiceItem } from '@/types/service/service-item';
 
 interface Service {
     id: string;
