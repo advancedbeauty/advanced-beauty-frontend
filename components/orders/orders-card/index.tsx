@@ -10,21 +10,21 @@ interface OrderCardProps {
 }
 
 const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
-    const statusVariants = {
-        PENDING: 'secondary',
-        CONFIRMED: 'default',
-        PROCESSING: 'primary',
-        COMPLETED: 'success',
-        CANCELLED: 'destructive',
-        REFUNDED: 'outline',
-    };
+    // const statusVariants = {
+    //     PENDING: 'secondary',
+    //     CONFIRMED: 'default',
+    //     PROCESSING: 'primary',
+    //     COMPLETED: 'success',
+    //     CANCELLED: 'destructive',
+    //     REFUNDED: 'outline',
+    // };
 
-    const paymentStatusVariants = {
-        PENDING: 'warning',
-        COMPLETED: 'success',
-        FAILED: 'destructive',
-        REFUNDED: 'outline',
-    };
+    // const paymentStatusVariants = {
+    //     PENDING: 'warning',
+    //     COMPLETED: 'success',
+    //     FAILED: 'destructive',
+    //     REFUNDED: 'outline',
+    // };
 
     return (
         <div className="bg-white shadow-md rounded-lg p-6 mb-4 border">
