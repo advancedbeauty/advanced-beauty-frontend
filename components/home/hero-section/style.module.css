@@ -21,9 +21,9 @@
     visibility: visible;
 }
 
-.imageContainer.active img {
+/* .imageContainer.active img {
     animation: zoomOut 7s ease-in-out forwards;
-}
+} */
 
 .content {
     position: absolute;

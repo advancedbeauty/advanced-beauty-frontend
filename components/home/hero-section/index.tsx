@@ -1,91 +1,70 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
-import styles from '@/components/home/hero-section/style.module.css';
-import { Roboto_Slab } from 'next/font/google';
-import Link from 'next/link';
 import Image from 'next/image';
-import { FaArrowRight } from 'react-icons/fa6';
-
-const roboslab = Roboto_Slab({
-    subsets: ['latin'],
-    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-});
-
-interface SlideImage {
-    src: string;
-    heading: string;
-    alt: string;
-}
-
-const slides: SlideImage[] = [
-    {
-        src: '/section-images/heroSection/SLIDE_01.jpg',
-        heading: 'Art Manicure',
-        alt: 'Art Manicure Slide 1',
-    },
-    {
-        src: '/section-images/heroSection/SLIDE_03.jpg',
-        heading: 'Art Manicure',
-        alt: 'Art Manicure Slide 2',
-    },
-    {
-        src: '/section-images/heroSection/SLIDE_04.jpg',
-        heading: 'Art Manicure',
-        alt: 'Art Manicure Slide 3',
-    },
-];
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import slides from '@/data/HomeBanners';
 
 const HeroSection: React.FC = () => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentSlide, setCurrentSlide] = useState<number>(0);
+    const [displayedSlide, setDisplayedSlide] = useState<number>(0);
+
+    const goToNextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+    };
+
+    const goToPreviousSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    };
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % slides.length);
-        }, 7000);
+            goToNextSlide();
+        }, 10000);
 
         return () => clearInterval(intervalId);
     }, []);
 
+    useEffect(() => {
+        setDisplayedSlide(currentSlide);
+    }, [currentSlide]);
+
     return (
-        <div className={`${styles.heroSection} h-[600px] md:h-[700px] lg:h-screen`}>
+        <div className="relative w-full h-[calc(100vh-80px)] overflow-hidden group">
             {slides.map((slide, index) => (
                 <div
                     key={index}
-                    className={`${styles.imageContainer} ${index === currentImageIndex ? styles.active : ''}`}
+                    style={{
+                        display: index === displayedSlide ? 'block' : 'none',
+                    }}
                 >
                     <Image
                         src={slide.src}
                         alt={slide.alt}
                         fill
-                        priority={true}
-                        quality={90}
-                        sizes="100vw"
+                        priority={index === 0}
+                        quality={100}
                         className="object-cover"
+                        sizes="100vw"
                     />
-                    <div className={`${styles.content} flex flex-col w-full items-center text-white`}>
-                        <span
-                            className={`${styles.heroSubTitleOne} select-none font-medium font-quentin leading-tight z-[5] text-[#D9C1A3]`}
-                        >
-                            nail fashion
-                        </span>
-                        <h1 className={`${styles.heroMainTitle} ${roboslab.className} uppercase leading-tight`}>
-                            {slide.heading}
-                        </h1>
-                        <div className="mt-4 flex flex-col sm:flex-row gap-2 overflow-hidden">
-                            <div>Best quality.</div>
-                            <div>Always in trend.</div>
-                            <div>Creative color styles.</div>
-                        </div>
-                        <Link
-                            href={'#shopSectionHome'}
-                            className={`${styles.buyNowButton} border border-white hover:bg-white hover:text-black transition-all duration-300 mt-10 px-5 py-3 flex items-center gap-2 text-xs sm:text-sm lg:text-base font-medium`}
-                        >
-                            Buy Now
-                            <FaArrowRight />
-                        </Link>
-                    </div>
                 </div>
             ))}
+
+            {/* Navigation Arrows */}
+            <button
+                onClick={goToPreviousSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                aria-label="Previous slide"
+            >
+                <ChevronLeft size={24} />
+            </button>
+            <button
+                onClick={goToNextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                aria-label="Next slide"
+            >
+                <ChevronRight size={24} />
+            </button>
         </div>
     );
 };

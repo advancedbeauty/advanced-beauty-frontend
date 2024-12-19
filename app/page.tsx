@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '@/components/navbar';
 import FooterBar from '@/components/footer/footer-bar';
 import Footer from '@/components/footer';
 import HeroSection from '@/components/home/hero-section';
@@ -15,11 +14,11 @@ import HomeFAQSection from '@/components/home/faq-section';
 import HomeSubscribeNewsletter from '@/components/home/subscribe-newsletter';
 import FloatingActions from '@/components/ui/features/FloatingActions';
 import HomeCategoriesSection from '@/components/home/categories-section';
+import NavbarMarginLayout from '@/components/ui/navbar-margin-layout';
 
 const page = () => {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-start min-w-screen overflow-x-hidden relative">
-            <Navbar />
+        <NavbarMarginLayout>
             <HeroSection />
             <HomeCategoriesSection />
             <HomeAboutSection />
@@ -35,7 +34,7 @@ const page = () => {
             <FloatingActions />
             <FooterBar />
             <Footer />
-        </main>
+        </NavbarMarginLayout>
     );
 };
 
