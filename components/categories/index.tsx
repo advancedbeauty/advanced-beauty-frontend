@@ -9,19 +9,12 @@ import { fetchServiceCategories } from '@/actions/admin/service/service-category
 import ImageCard from '../ui/cards/ImageCard';
 import { fetchShopCategories, ShopCategory } from '@/actions/admin/shop/shop-category.actions';
 import { ServiceCategory } from '@/types/service/service-category';
+import { formatUrlString } from '@/lib/formatUrlString';
 
 const Categories = () => {
     const [categories, setCategories] = useState<ServiceCategory[]>([]);
     const [shopCategories, setShopCategories] = useState<ShopCategory[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    const formatUrlString = (title: string) => {
-        return title
-            .toLowerCase()
-            .replace(/&/g, 'and')
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-+|-+$/g, '');
-    };
 
     React.useEffect(() => {
         const fetchCategories = async () => {
@@ -142,7 +135,7 @@ const Categories = () => {
                                         href="/shop"
                                         className="w-full h-full max-h-[50px] bg-gray-100 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center font-medium"
                                     >
-                                        View All Shop 
+                                        View All Shop
                                     </Link>
                                 </div>
                             </div>
