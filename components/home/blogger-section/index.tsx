@@ -14,13 +14,13 @@ const HomeBloggerSection = () => {
                         <InstagramEmbed postUrl="https://www.instagram.com/reel/C3xLL_HNXg2/" />
                     </div>
                     <div className="max-w-lg mx-auto">
-                        <InstagramEmbed postUrl="https://www.instagram.com/reel/C63MARGPtRq/" />
+                        <InstagramEmbed postUrl="https://www.instagram.com/reel/DDcjZCVz2Iw/" />
                     </div>
                     <div className="max-w-lg mx-auto">
-                        <InstagramEmbed postUrl="https://www.instagram.com/reel/C0k0wu5KDqg/" />
+                        <InstagramEmbed postUrl="https://www.instagram.com/reel/DDmZRzpzdCD/" />
                     </div>
                     <div className="max-w-lg mx-auto">
-                        <InstagramEmbed postUrl="https://www.instagram.com/reel/C3SVQInvk8t/" />
+                        <InstagramEmbed postUrl="https://www.instagram.com/reel/C_-czqJvUAq/" />
                     </div>
                 </div>
             </Container>

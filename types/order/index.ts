@@ -1,6 +1,8 @@
 export interface OrderItem {
     id: string;
     itemId: string;
+    itemName: string;
+    itemImage: string;
     itemType: 'SERVICE' | 'SHOP';
     quantity: number;
     price: number;
@@ -47,6 +49,20 @@ export interface Order {
     };
     orderItems: OrderItem[];
     createdAt: Date;
+    user?: {
+        name: string | null;
+        email: string | null;
+    };
+}
+
+export enum OrderStatus {
+    PENDING = 'PENDING',
+    CONFIRMED = 'CONFIRMED',
+    PROCESSING = 'PROCESSING',
+    COMPLETED = 'COMPLETED',
+    CANCELLED = 'CANCELLED',
+    REFUNDED = 'REFUNDED',
+    DELIVERED = 'DELIVERED',
 }
 
 // Utility function to convert Prisma order to our Order type
@@ -71,5 +87,6 @@ export function convertPrismaOrderToOrder(prismaOrder: any): Order {
             appointmentTime: item.appointmentTime,
         })),
         createdAt: prismaOrder.createdAt,
+        user: prismaOrder.user,
     };
 }

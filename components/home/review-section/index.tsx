@@ -4,6 +4,7 @@ import CustomCarousel from '@/components/ui/custom-carousel';
 import Container from '@/components/ui/features/Container';
 import Section from '@/components/ui/features/Section';
 import { fetchReviews } from '@/actions/admin/review/review.actions';
+// import { FcGoogle } from "react-icons/fc";
 
 async function HomeReviewSection() {
     const reviewsData = await fetchReviews();
@@ -29,6 +30,11 @@ async function HomeReviewSection() {
                         navigationOn={true}
                     />
                 </div>
+                {/* <div className='w-full flex flex-col justify-center items-center mt-5'>
+                    <FcGoogle size={24}/>
+                    <div className='mt-2'><strong>Google</strong> rating score:4.8 of 5,</div>
+                    <div className=''>based on <strong>423 reviews</strong></div>
+                </div> */}
             </Container>
         </Section>
     );

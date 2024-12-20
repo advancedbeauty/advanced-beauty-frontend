@@ -30,6 +30,8 @@ export const useCreateOrder = () => {
             const orderItems: OrderItem[] = cart.map((cartItem) => ({
                 id: cartItem.id,
                 itemId: cartItem.service?.id || cartItem.shop?.id || '',
+                itemName: cartItem.service?.title || cartItem.shop?.title || '',
+                itemImage: cartItem.service?.imageSrc || cartItem.shop?.imageSrc || '',
                 itemType: cartItem.service ? 'SERVICE' : 'SHOP',
                 quantity: cartItem.quantity,
                 price: cartItem.service?.price || cartItem.shop?.price || 0,

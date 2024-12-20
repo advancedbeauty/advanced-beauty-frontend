@@ -12,6 +12,15 @@ import OrderCard from './orders-card';
 
 const OrdersPage = () => {
     const { orders, isLoading, error } = useOrders();
+    const [searchQuery, setSearchQuery] = React.useState('');
+
+    const filteredOrders = orders.filter((order) =>
+        order.orderItems.some(
+            (item) =>
+                item.itemName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                order.orderNumber.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    );
 
     return (
         <Section className="py-10 md:py-20">
@@ -19,7 +28,7 @@ const OrdersPage = () => {
                 <div className="flex items-center justify-between flex-wrap mb-8">
                     <MainTitle heading="My Orders" subheading="View and manage your recent purchases" />
                     <Button asChild>
-                        <Link href="/shop">Continue Shopping</Link>
+                        <Link href="/services">Continue Shopping</Link>
                     </Button>
                 </div>
 
@@ -37,17 +46,48 @@ const OrdersPage = () => {
                         </Button>
                     </div>
                 ) : orders.length === 0 ? (
-                    <div className="text-center space-y-4">
-                        <p className="text-gray-500">You haven&apos;t placed any orders yet.</p>
+                    <div className="text-center space-y-4 space-x-4 mt-20">
+                        <p className="text-gray-500">You haven&apos;t booked any services or buy an item yet.</p>
                         <Button asChild>
-                            <Link href="/shop">Shop Now</Link>
+                            <Link href="/services">Book services now</Link>
+                        </Button>
+                        <Button asChild>
+                            <Link href="/shop">Explore shope items</Link>
                         </Button>
                     </div>
                 ) : (
                     <div className="space-y-4">
-                        {orders.map((order) => (
-                            <OrderCard key={order.id} order={order} />
-                        ))}
+                        <div className="relative">
+                            <input
+                                type="text"
+                                placeholder="Search orders by product name or order number..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full px-4 py-3 pl-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+                            />
+                            <svg
+                                className="absolute left-3 top-3.5 h-5 w-5 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                />
+                            </svg>
+                        </div>
+
+                        {filteredOrders.length === 0 ? (
+                            <div className="text-center space-y-4 mt-8">
+                                <p className="text-gray-500">No orders found matching "{searchQuery}"</p>
+                                <Button onClick={() => setSearchQuery('')}>Clear Search</Button>
+                            </div>
+                        ) : (
+                            filteredOrders.map((order) => <OrderCard key={order.id} order={order} />)
+                        )}
                     </div>
                 )}
             </Container>

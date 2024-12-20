@@ -182,6 +182,8 @@ model OrderItem {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   orderId    String   @db.ObjectId
   itemId     String   @db.ObjectId // References either service or shop item
+  itemName   String
+  itemImage  String   @default("")
   itemType   ItemType // To distinguish between service and shop items
   quantity   Int      @default(1)
   price      Float // Price at the time of or der

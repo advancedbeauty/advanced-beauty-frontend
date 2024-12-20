@@ -111,18 +111,10 @@ const DashboardSideBar = () => {
                     <SidebarGroupLabel>Manage Orders</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <Link
-                            href={'/admin/create/service-category'}
-                            className={getLinkClassName('/admin/create/service-category')}
+                            href={'/admin/manage/orders'}
+                            className={getLinkClassName('/admin/manage/orders')}
                         >
-                            Service category
-                        </Link>
-                    </SidebarGroupContent>
-                    <SidebarGroupContent>
-                        <Link
-                            href={'/admin/create/service-item'}
-                            className={getLinkClassName('/admin/create/service-item')}
-                        >
-                            Service item
+                            Orders
                         </Link>
                     </SidebarGroupContent>
                 </SidebarGroup>
