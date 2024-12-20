@@ -30,7 +30,7 @@ const HeroSection: React.FC = () => {
     }, [currentSlide]);
 
     return (
-        <div className="relative w-full h-[calc(100vh-80px)] overflow-hidden group">
+        <div className="relative w-full overflow-hidden group">
             {slides.map((slide, index) => (
                 <div
                     key={index}
@@ -41,11 +41,12 @@ const HeroSection: React.FC = () => {
                     <Image
                         src={slide.src}
                         alt={slide.alt}
-                        fill
+                        width={10000}
+                        height={10000}
                         priority={index === 0}
                         quality={100}
-                        className="object-cover"
-                        sizes="100vw"
+                        className="object-contain h-auto"
+                        
                     />
                 </div>
             ))}
