@@ -47,8 +47,9 @@ export default function ManageHeroSection() {
             setBanners([...banners, result.slide]);
             reset();
             router.refresh();
-        } catch (error: any) {
-            setError(error.message || 'Error uploading banner');
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : 'Error uploading banner';
+            setError(errorMessage);
             console.error('Error uploading banner:', error);
         } finally {
             setIsUploading(false);
@@ -68,8 +69,9 @@ export default function ManageHeroSection() {
 
             setBanners(banners.filter((banner) => banner.src !== src));
             router.refresh();
-        } catch (error: any) {
-            setError(error.message || 'Error deleting banner');
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : 'Error deleting banner';
+            setError(errorMessage);
             console.error('Error deleting banner:', error);
         }
     };

@@ -89,10 +89,10 @@ export async function POST(request: NextRequest) {
             success: true,
             slide: newSlide
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Upload error:', error);
         return NextResponse.json({ 
-            error: error.message || 'Error uploading file' 
+            error: error instanceof Error ? error.message : 'Error uploading file' 
         }, { status: 500 });
     }
 }

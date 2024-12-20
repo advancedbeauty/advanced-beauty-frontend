@@ -2,7 +2,7 @@ import { SlideImage } from '@/types/banner-image';
 
 const slides: SlideImage[] = [
   {
-    "src": "/bannerImages/banner-1734695940187-214198419.jpg",
+    "src": "/bannerImages/banner-1734696470194-43678446.jpg",
     "alt": "banner 3"
   },
   {
