@@ -4,9 +4,10 @@ import Navbar from '@/components/navbar';
 
 interface NavbarMarginLayoutProps {
     children: React.ReactNode;
+    className?: string;
 }
 
-const NavbarMarginLayout: React.FC<NavbarMarginLayoutProps> = ({ children }) => {
+const NavbarMarginLayout: React.FC<NavbarMarginLayoutProps> = ({ children, className }) => {
     const [navbarHeight, setNavbarHeight] = useState<number | null>(null);
 
     useEffect(() => {
@@ -45,7 +46,7 @@ const NavbarMarginLayout: React.FC<NavbarMarginLayoutProps> = ({ children }) => 
     }, []);
 
     return (
-        <div className="relative">
+        <div className={`relative ${className}`}>
             <Navbar />
             <div
                 className="transition-[padding] duration-200"

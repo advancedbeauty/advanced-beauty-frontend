@@ -18,7 +18,7 @@ import NavbarMarginLayout from '@/components/ui/navbar-margin-layout';
 
 const page = () => {
     return (
-        <NavbarMarginLayout>
+        <NavbarMarginLayout className='overflow-x-hidden'>
             <HeroSection />
             <HomeCategoriesSection />
             <HomeAboutSection />
