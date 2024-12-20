@@ -18,16 +18,17 @@ const HeroSection: React.FC = () => {
     };
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            goToNextSlide();
-        }, 10000);
-
+        const intervalId = setInterval(goToNextSlide, 10000);
         return () => clearInterval(intervalId);
     }, []);
 
     useEffect(() => {
         setDisplayedSlide(currentSlide);
     }, [currentSlide]);
+
+    if (slides.length === 0) {
+        return null;
+    }
 
     return (
         <div className="relative w-full overflow-hidden group">
@@ -41,31 +42,33 @@ const HeroSection: React.FC = () => {
                     <Image
                         src={slide.src}
                         alt={slide.alt}
-                        width={10000}
-                        height={10000}
+                        width={1920}
+                        height={1080}
                         priority={index === 0}
                         quality={100}
-                        className="object-contain h-auto"
-                        
+                        className="object-fill w-full h-auto max-h-[90vh]"
                     />
                 </div>
             ))}
 
-            {/* Navigation Arrows */}
-            <button
-                onClick={goToPreviousSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                aria-label="Previous slide"
-            >
-                <ChevronLeft size={24} />
-            </button>
-            <button
-                onClick={goToNextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                aria-label="Next slide"
-            >
-                <ChevronRight size={24} />
-            </button>
+            {slides.length > 1 && (
+                <>
+                    <button
+                        onClick={goToPreviousSlide}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        aria-label="Previous slide"
+                    >
+                        <ChevronLeft size={24} />
+                    </button>
+                    <button
+                        onClick={goToNextSlide}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        aria-label="Next slide"
+                    >
+                        <ChevronRight size={24} />
+                    </button>
+                </>
+            )}
         </div>
     );
 };

@@ -130,6 +130,14 @@ const DashboardSideBar = () => {
                     <SidebarGroupLabel>Manage Home</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <Link
+                            href={'/admin/create/hero-section'}
+                            className={getLinkClassName('/admin/create/hero-section')}
+                        >
+                            Hero section
+                        </Link>
+                    </SidebarGroupContent>
+                    <SidebarGroupContent>
+                        <Link
                             href={'/admin/create/home-reviews'}
                             className={getLinkClassName('/admin/create/home-reviews')}
                         >
