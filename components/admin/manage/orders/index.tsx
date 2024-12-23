@@ -7,6 +7,7 @@ import { OrderStatus } from '@/types/order';
 import { formatUrlString } from '@/lib/formatUrlString';
 
 const ManageOrdersPage = async () => {
+    
     const ordersData = await getAdminOrders({});
     const statsData = await getOrderStats();
 

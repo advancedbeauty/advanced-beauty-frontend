@@ -10,8 +10,10 @@ import { Badge } from '@/components/ui/badge';
 import { OrderStatus } from '@/types/order';
 
 const OrderDetailsPage = () => {
-    const { orderId } = useParams();
-    const { order, isLoading, error } = useOrderDetails(orderId);
+    const params = useParams();
+    const orderId = Array.isArray(params.orderId) ? params.orderId[0] : params.orderId;
+
+    const { order, isLoading, error } = useOrderDetails(orderId || '');
 
     if (isLoading) {
         return <div>Loading...</div>;

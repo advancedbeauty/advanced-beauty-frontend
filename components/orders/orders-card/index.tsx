@@ -62,7 +62,6 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
 
             {order.orderItems.map((item) => (
                 <div key={item.id} className="p-4 md:p-6 flex flex-col md:flex-row gap-6">
-                    {/* Product Image */}
                     <Link
                         href={`/${item.itemType === 'SERVICE' ? 'services' : 'shop'}/${formatUrlString(
                             item.itemType
@@ -77,7 +76,6 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
                         />
                     </Link>
 
-                    {/* Product Details */}
                     <div className="flex-1 space-y-4">
                         <div className="flex justify-between">
                             <div>
@@ -113,41 +111,37 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
                 </div>
             ))}
 
-            {/* Actions */}
             <div className="p-4 flex justify-between items-center">
                 <div className="text-lg font-semibold">Total: {formatPrice(order.totalAmount)}</div>
                 <div className="space-x-3">
-                    {order.status !== OrderStatus.COMPLETED &&
-                        order.status !== OrderStatus.CANCELLED &&
-                        order.status !== OrderStatus.REFUNDED && (
-                            <>
-                                <Button variant="outline" size="sm" asChild>
-                                    <Link href={`/orders/${order.id}`}>View Details</Link>
-                                </Button>
-                                <AlertDialog>
-                                    <AlertDialogTrigger asChild>
-                                        <Button variant="destructive" size="sm" disabled={isLoading}>
-                                            Cancel Order
-                                        </Button>
-                                    </AlertDialogTrigger>
-                                    <AlertDialogContent>
-                                        <AlertDialogHeader>
-                                            <AlertDialogTitle>Cancel Order</AlertDialogTitle>
-                                            <AlertDialogDescription>
-                                                Are you sure you want to cancel this order? This action cannot be
-                                                undone.
-                                            </AlertDialogDescription>
-                                        </AlertDialogHeader>
-                                        <AlertDialogFooter>
-                                            <AlertDialogCancel>No, keep order</AlertDialogCancel>
-                                            <AlertDialogAction onClick={handleCancelOrder} disabled={isLoading}>
-                                                Yes, cancel order
-                                            </AlertDialogAction>
-                                        </AlertDialogFooter>
-                                    </AlertDialogContent>
-                                </AlertDialog>
-                            </>
-                        )}
+                    {(order.status !== OrderStatus.COMPLETED && order.status !== OrderStatus.CANCELLED && order.status !== OrderStatus.REFUNDED) && (
+                        <>
+                            <Button variant="outline" size="sm" asChild>
+                                <Link href={`/orders/${order.id}`}>View Details</Link>
+                            </Button>
+                            <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                    <Button variant="destructive" size="sm" disabled={isLoading}>
+                                        Cancel Order
+                                    </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Cancel Order</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            Are you sure you want to cancel this order? This action cannot be undone.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>No, keep order</AlertDialogCancel>
+                                        <AlertDialogAction onClick={handleCancelOrder} disabled={isLoading}>
+                                            Yes, cancel order
+                                        </AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
+                        </>
+                    )}
                 </div>
             </div>
         </Card>

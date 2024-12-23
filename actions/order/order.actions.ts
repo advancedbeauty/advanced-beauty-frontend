@@ -40,19 +40,15 @@ const OrderSchema = z.object({
 });
 
 export async function createOrder(orderData: OrderData) {
-    // console.log(orderData);
     try {
-        // Validate order data
         const validatedOrder = OrderSchema.parse(orderData);
 
-        // Start a transaction
         const order = await prisma.$transaction(async (prisma) => {
-            // Create order
             const newOrder = await prisma.order.create({
                 data: {
                     userId: validatedOrder.userId,
                     orderNumber: validatedOrder.orderNumber,
-                    status: 'PENDING',
+                    status: OrderStatus.PENDING,
                     totalAmount: validatedOrder.totalAmount,
                     paymentStatus: validatedOrder.paymentStatus,
                     address: JSON.stringify(validatedOrder.address),
@@ -73,7 +69,6 @@ export async function createOrder(orderData: OrderData) {
                 },
             });
 
-            // Update inventory for shop items
             for (const item of validatedOrder.orderItems) {
                 if (item.itemType === 'SHOP') {
                     await prisma.shop.update({
@@ -83,7 +78,6 @@ export async function createOrder(orderData: OrderData) {
                 }
             }
 
-            // Clear user's cart
             await prisma.cart.deleteMany({
                 where: { userId: validatedOrder.userId },
             });
@@ -91,7 +85,6 @@ export async function createOrder(orderData: OrderData) {
             return newOrder;
         });
 
-        // Revalidate paths
         revalidatePath('/orders');
         revalidatePath('/account');
 
