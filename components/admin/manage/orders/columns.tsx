@@ -25,7 +25,70 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog';
+
+const OrderActionsCell = ({ order }: { order: Order }) => {
+    const { updateOrderStatus, isLoading } = useUpdateOrderStatus();
+
+    const handleStatusUpdate = async (status: OrderStatus) => {
+        await updateOrderStatus(order.id, status);
+    };
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                    <MoreHorizontal className="h-4 w-4" />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem asChild>
+                    <Link href={`/admin/orders/${order.id}`} className="flex items-center">
+                        <Eye className="mr-2 h-4 w-4" />
+                        View Details
+                    </Link>
+                </DropdownMenuItem>
+                {order.status === OrderStatus.PENDING && (
+                    <>
+                        <DropdownMenuItem
+                            onClick={() => handleStatusUpdate(OrderStatus.PROCESSING)}
+                            disabled={isLoading}
+                        >
+                            <CheckCircle className="mr-2 h-4 w-4" />
+                            Accept Order
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <AlertDialog>
+                                <AlertDialogTrigger className="flex items-center text-red-600">
+                                    <XCircle className="mr-2 h-4 w-4" />
+                                    Cancel Order
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Cancel Order</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            Are you sure you want to cancel this order? This action cannot be undone.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>No, keep order</AlertDialogCancel>
+                                        <AlertDialogAction
+                                            onClick={() => handleStatusUpdate(OrderStatus.CANCELLED)}
+                                            disabled={isLoading}
+                                        >
+                                            Yes, cancel order
+                                        </AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
+                        </DropdownMenuItem>
+                    </>
+                )}
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+};
 
 const OrderStatusBadge = ({ status }: { status: OrderStatus }) => {
     const getStatusColor = (status: OrderStatus) => {
@@ -45,20 +108,14 @@ const OrderStatusBadge = ({ status }: { status: OrderStatus }) => {
         }
     };
 
-    return (
-        <Badge className={`${getStatusColor(status)} px-3 py-1`}>
-            {status.replace(/_/g, ' ')}
-        </Badge>
-    );
+    return <Badge className={`${getStatusColor(status)} px-3 py-1`}>{status.replace(/_/g, ' ')}</Badge>;
 };
 
 export const columns: ColumnDef<Order>[] = [
     {
         accessorKey: 'orderNumber',
         header: 'Order ID',
-        cell: ({ row }) => (
-            <div className="font-medium">{row.original.orderNumber}</div>
-        ),
+        cell: ({ row }) => <div className="font-medium">{row.original.orderNumber}</div>,
     },
     {
         accessorKey: 'user',
@@ -93,11 +150,7 @@ export const columns: ColumnDef<Order>[] = [
     {
         accessorKey: 'totalAmount',
         header: 'Amount',
-        cell: ({ row }) => (
-            <div className="font-medium">
-                {formatPrice(row.original.totalAmount)}
-            </div>
-        ),
+        cell: ({ row }) => <div className="font-medium">{formatPrice(row.original.totalAmount)}</div>,
     },
     {
         accessorKey: 'status',
@@ -109,74 +162,12 @@ export const columns: ColumnDef<Order>[] = [
         header: 'Date',
         cell: ({ row }) => (
             <div className="text-sm">
-                {new Date(row.original.createdAt).toLocaleDateString()}
+                {new Date(row.original.createdAt).toLocaleDateString('en-GB')}
             </div>
         ),
     },
     {
         id: 'actions',
-        cell: ({ row }) => {
-            const order = row.original;
-            const { updateOrderStatus, isLoading } = useUpdateOrderStatus();
-
-            const handleStatusUpdate = async (status: OrderStatus) => {
-                await updateOrderStatus(order.id, status);
-            };
-
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem asChild>
-                            <Link href={`/admin/orders/${order.id}`} className="flex items-center">
-                                <Eye className="mr-2 h-4 w-4" />
-                                View Details
-                            </Link>
-                        </DropdownMenuItem>
-                        {order.status === OrderStatus.PENDING && (
-                            <>
-                                <DropdownMenuItem
-                                    onClick={() => handleStatusUpdate(OrderStatus.PROCESSING)}
-                                    disabled={isLoading}
-                                >
-                                    <CheckCircle className="mr-2 h-4 w-4" />
-                                    Accept Order
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                    <AlertDialog>
-                                        <AlertDialogTrigger className="flex items-center text-red-600">
-                                            <XCircle className="mr-2 h-4 w-4" />
-                                            Cancel Order
-                                        </AlertDialogTrigger>
-                                        <AlertDialogContent>
-                                            <AlertDialogHeader>
-                                                <AlertDialogTitle>Cancel Order</AlertDialogTitle>
-                                                <AlertDialogDescription>
-                                                    Are you sure you want to cancel this order? This action cannot be undone.
-                                                </AlertDialogDescription>
-                                            </AlertDialogHeader>
-                                            <AlertDialogFooter>
-                                                <AlertDialogCancel>No, keep order</AlertDialogCancel>
-                                                <AlertDialogAction
-                                                    onClick={() => handleStatusUpdate(OrderStatus.CANCELLED)}
-                                                    disabled={isLoading}
-                                                >
-                                                    Yes, cancel order
-                                                </AlertDialogAction>
-                                            </AlertDialogFooter>
-                                        </AlertDialogContent>
-                                    </AlertDialog>
-                                </DropdownMenuItem>
-                            </>
-                        )}
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        },
+        cell: ({ row }) => <OrderActionsCell order={row.original} />,
     },
 ];

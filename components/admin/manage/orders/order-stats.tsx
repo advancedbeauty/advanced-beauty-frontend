@@ -28,7 +28,7 @@ export function OrderStats({ stats }: OrderStatsProps) {
 
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Today's Revenue</CardTitle>
+                    <CardTitle className="text-sm font-medium">Today&apos;s Revenue</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">₹{stats.todayRevenue.toFixed(2)}</div>
