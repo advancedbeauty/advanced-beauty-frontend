@@ -4,7 +4,6 @@ import { prisma } from '@/lib/prisma';
 import { OrderData } from '@/types/order';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
-import { getCurrentUser } from '../auth/getCurrentUser';
 import { auth } from '@/auth';
 import { OrderStatus, PaymentStatus } from '@prisma/client';
 
@@ -245,18 +244,18 @@ export async function getOrderStats() {
         const [total, pending, processing, completed, cancelled, refunded, totalRevenue, todayRevenue] =
             await Promise.all([
                 prisma.order.count(),
-                prisma.order.count({ where: { status: 'PENDING' } }),
-                prisma.order.count({ where: { status: 'PROCESSING' } }),
-                prisma.order.count({ where: { status: 'COMPLETED' } }),
-                prisma.order.count({ where: { status: 'CANCELLED' } }),
-                prisma.order.count({ where: { status: 'REFUNDED' } }),
+                prisma.order.count({ where: { status: OrderStatus.PENDING } }),
+                prisma.order.count({ where: { status: OrderStatus.PROCESSING } }),
+                prisma.order.count({ where: { status: OrderStatus.COMPLETED } }),
+                prisma.order.count({ where: { status: OrderStatus.CANCELLED } }), // Updated line
+                prisma.order.count({ where: { status: OrderStatus.REFUNDED } }),
                 prisma.order.aggregate({
-                    where: { status: 'COMPLETED' },
+                    where: { status: OrderStatus.COMPLETED },
                     _sum: { totalAmount: true },
                 }),
                 prisma.order.aggregate({
                     where: {
-                        status: 'COMPLETED',
+                        status: OrderStatus.COMPLETED,
                         createdAt: { gte: today },
                     },
                     _sum: { totalAmount: true },

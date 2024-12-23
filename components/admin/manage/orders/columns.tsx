@@ -158,6 +158,34 @@ export const columns: ColumnDef<Order>[] = [
         cell: ({ row }) => <OrderStatusBadge status={row.original.status} />,
     },
     {
+        accessorKey: 'address',
+        header: 'Address',
+        cell: ({ row }) => {
+            const address = row.original.address;
+            return (
+                <div className="text-sm">
+                    {address.fullName}<br />
+                    {address.addressLine1}<br />
+                    {address.addressLine2 && <>{address.addressLine2}<br /></>}
+                    {address.city}, {address.postalCode}<br />
+                    {address.country}
+                </div>
+            );
+        },
+    },
+    {
+        accessorKey: 'phone',
+        header: 'Phone No.',
+        cell: ({ row }) => {
+            const address = row.original.address;
+            return (
+                <div className="text-sm">
+                    {address.phoneNumber}
+                </div>
+            );
+        },
+    },
+    {
         accessorKey: 'createdAt',
         header: 'Date',
         cell: ({ row }) => (

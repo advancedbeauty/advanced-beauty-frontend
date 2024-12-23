@@ -11,8 +11,7 @@ enum OrderStatus {
   PENDING
   PROCESSING
   COMPLETED
-  CANCELLED_BY_USER
-  CANCELLED_BY_ADMIN
+  CANCELLED
   REFUNDED
 }
 
@@ -163,7 +162,7 @@ model Offer {
 
 model Order {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String
+  userId        String        @db.ObjectId 
   orderNumber   String        @unique
   status        OrderStatus   @default(PENDING)
   totalAmount   Float
@@ -179,7 +178,7 @@ model Order {
 
 model OrderAction {
   id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  orderId   String
+  orderId   String      @db.ObjectId
   status    OrderStatus
   note      String?
   actionBy  String
