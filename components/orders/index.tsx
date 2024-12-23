@@ -82,7 +82,7 @@ const OrdersPage = () => {
 
                         {filteredOrders.length === 0 ? (
                             <div className="text-center space-y-4 mt-8">
-                                <p className="text-gray-500">No orders found matching "{searchQuery}"</p>
+                                <p className="text-gray-500">No orders found matching &quot;{searchQuery}&quot;</p>
                                 <Button onClick={() => setSearchQuery('')}>Clear Search</Button>
                             </div>
                         ) : (

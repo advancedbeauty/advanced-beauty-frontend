@@ -306,7 +306,7 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus, pa
             },
         });
 
-        revalidatePath('/admin/orders');
+        revalidatePath('/admin/manage/orders');
 
         return { success: true, order: updatedOrder };
     } catch (error) {
@@ -355,7 +355,7 @@ export async function deleteOrder(orderId: string) {
             where: { id: orderId },
         });
 
-        revalidatePath('/admin/orders');
+        revalidatePath('/admin/manage/orders');
 
         return { success: true };
     } catch (error) {

@@ -34,7 +34,7 @@ export interface Order {
     id: string;
     userId: string;
     orderNumber: string;
-    status: 'PENDING' | 'CONFIRMED' | 'PROCESSING' | 'COMPLETED' | 'CANCELLED' | 'REFUNDED';
+    status: OrderStatus;
     totalAmount: number;
     paymentStatus: 'PENDING' | 'COMPLETED' | 'FAILED' | 'REFUNDED';
     address: {
@@ -57,12 +57,32 @@ export interface Order {
 
 export enum OrderStatus {
     PENDING = 'PENDING',
-    CONFIRMED = 'CONFIRMED',
     PROCESSING = 'PROCESSING',
     COMPLETED = 'COMPLETED',
     CANCELLED = 'CANCELLED',
-    REFUNDED = 'REFUNDED',
-    DELIVERED = 'DELIVERED',
+    REFUNDED = 'REFUNDED'
+}
+
+// Add this interface for order actions
+export interface OrderAction {
+    id: string;
+    orderId: string;
+    status: OrderStatus;
+    note?: string;
+    actionBy: string;
+    createdAt: Date;
+}
+
+// Add this interface to your existing types/order/index.ts file
+export interface OrderStats {
+    total: number;
+    pending: number;
+    processing: number;
+    completed: number;
+    cancelled: number;
+    refunded: number;
+    totalRevenue: number;
+    todayRevenue: number;
 }
 
 // Utility function to convert Prisma order to our Order type

@@ -9,10 +9,10 @@ datasource db {
 
 enum OrderStatus {
   PENDING
-  CONFIRMED
   PROCESSING
   COMPLETED
-  CANCELLED
+  CANCELLED_BY_USER
+  CANCELLED_BY_ADMIN
   REFUNDED
 }
 
@@ -163,19 +163,28 @@ model Offer {
 
 model Order {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String        @db.ObjectId
-  orderNumber   String        @unique // For tracking purposes
+  userId        String
+  orderNumber   String        @unique
   status        OrderStatus   @default(PENDING)
   totalAmount   Float
-  paymentStatus PaymentStatus @default(PENDING)
-  paymentId     String? // For payment gateway reference
+  paymentStatus PaymentStatus
+  paymentId     String?
   address       String
+  orderItems    OrderItem[]
+  orderActions  OrderAction[]
+  user          User          @relation(fields: [userId], references: [id])
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
+}
 
-  // Relations
-  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  orderItems OrderItem[]
+model OrderAction {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String
+  status    OrderStatus
+  note      String?
+  actionBy  String
+  order     Order       @relation(fields: [orderId], references: [id])
+  createdAt DateTime    @default(now())
 }
 
 model OrderItem {
