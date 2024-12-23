@@ -4,6 +4,7 @@ import { columns } from './columns';
 import { OrderStats } from './order-stats';
 import { OrderFilters } from './order-filters';
 import { getAdminOrders, getOrderStats } from '@/actions/order/order.actions';
+import { OrderStatus } from '@/types/order';
 
 const ManageOrdersPage = async () => {
     const ordersData = await getAdminOrders({});
@@ -11,11 +12,12 @@ const ManageOrdersPage = async () => {
 
     // Transform orders to match the Order type
     const transformedOrders = ordersData.success && ordersData.orders
-        ? ordersData.orders.map(order => ({
-            ...order,
-            address: JSON.parse(order.address)
-        }))
-        : [];
+    ? ordersData.orders.map(order => ({
+        ...order,
+        address: JSON.parse(order.address),
+        status: order.status as OrderStatus
+    }))
+    : [];
 
     return (
         <div className="flex flex-col gap-4 p-4">
