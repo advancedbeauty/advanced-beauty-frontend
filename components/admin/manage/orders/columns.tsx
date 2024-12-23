@@ -52,7 +52,7 @@ const OrderActionsCell = ({ order }: { order: Order }) => {
                 {order.status === OrderStatus.PENDING && (
                     <>
                         <DropdownMenuItem
-                            onClick={() => handleStatusUpdate(OrderStatus.PROCESSING)}
+                            onClick={() => handleStatusUpdate(OrderStatus.ACCEPTED)}
                             disabled={isLoading}
                         >
                             <CheckCircle className="mr-2 h-4 w-4" />
@@ -95,8 +95,6 @@ const OrderStatusBadge = ({ status }: { status: OrderStatus }) => {
         switch (status) {
             case OrderStatus.PENDING:
                 return 'bg-yellow-100 text-yellow-800';
-            case OrderStatus.PROCESSING:
-                return 'bg-blue-100 text-blue-800';
             case OrderStatus.COMPLETED:
                 return 'bg-green-100 text-green-800';
             case OrderStatus.CANCELLED:

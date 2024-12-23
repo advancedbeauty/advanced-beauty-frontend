@@ -9,7 +9,7 @@ datasource db {
 
 enum OrderStatus {
   PENDING
-  PROCESSING
+  ACCEPTED
   COMPLETED
   CANCELLED
   REFUNDED

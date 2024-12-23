@@ -20,7 +20,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog';
 
 interface OrderCardProps {
     order: Order;
@@ -33,7 +33,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
         switch (status) {
             case OrderStatus.PENDING:
                 return 'bg-yellow-100 text-yellow-800';
-            case OrderStatus.PROCESSING:
+            case OrderStatus.ACCEPTED:
                 return 'bg-blue-100 text-blue-800';
             case OrderStatus.COMPLETED:
                 return 'bg-green-100 text-green-800';
@@ -55,13 +55,9 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
             <div className="p-4 flex justify-between items-center">
                 <div>
                     <p className="text-sm text-gray-500">Order #{order.orderNumber}</p>
-                    <p className="text-sm text-gray-500">
-                        Placed on {new Date(order.createdAt).toLocaleDateString()}
-                    </p>
+                    <p className="text-sm text-gray-500">Placed on {new Date(order.createdAt).toLocaleDateString()}</p>
                 </div>
-                <Badge className={`${getStatusColor(order.status)} px-3 py-1`}>
-                    {order.status.replace(/_/g, ' ')}
-                </Badge>
+                <Badge className={`${getStatusColor(order.status)} px-3 py-1`}>{order.status.replace(/_/g, ' ')}</Badge>
             </div>
 
             {order.orderItems.map((item) => (
@@ -119,36 +115,39 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
 
             {/* Actions */}
             <div className="p-4 flex justify-between items-center">
-                <div className="text-lg font-semibold">
-                    Total: {formatPrice(order.totalAmount)}
-                </div>
+                <div className="text-lg font-semibold">Total: {formatPrice(order.totalAmount)}</div>
                 <div className="space-x-3">
-                    <Button variant="outline" size="sm" asChild>
-                        <Link href={`/orders/${order.id}`}>View Details</Link>
-                    </Button>
-                    {order.status === OrderStatus.PENDING && (
-                        <AlertDialog>
-                            <AlertDialogTrigger asChild>
-                                <Button variant="destructive" size="sm" disabled={isLoading}>
-                                    Cancel Order
+                    {order.status !== OrderStatus.COMPLETED &&
+                        order.status !== OrderStatus.CANCELLED &&
+                        order.status !== OrderStatus.REFUNDED && (
+                            <>
+                                <Button variant="outline" size="sm" asChild>
+                                    <Link href={`/orders/${order.id}`}>View Details</Link>
                                 </Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                                <AlertDialogHeader>
-                                    <AlertDialogTitle>Cancel Order</AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                        Are you sure you want to cancel this order? This action cannot be undone.
-                                    </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                    <AlertDialogCancel>No, keep order</AlertDialogCancel>
-                                    <AlertDialogAction onClick={handleCancelOrder} disabled={isLoading}>
-                                        Yes, cancel order
-                                    </AlertDialogAction>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
-                    )}
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button variant="destructive" size="sm" disabled={isLoading}>
+                                            Cancel Order
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Cancel Order</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Are you sure you want to cancel this order? This action cannot be
+                                                undone.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>No, keep order</AlertDialogCancel>
+                                            <AlertDialogAction onClick={handleCancelOrder} disabled={isLoading}>
+                                                Yes, cancel order
+                                            </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+                            </>
+                        )}
                 </div>
             </div>
         </Card>

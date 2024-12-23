@@ -245,7 +245,7 @@ export async function getOrderStats() {
             await Promise.all([
                 prisma.order.count(),
                 prisma.order.count({ where: { status: OrderStatus.PENDING } }),
-                prisma.order.count({ where: { status: OrderStatus.PROCESSING } }),
+                prisma.order.count({ where: { status: OrderStatus.ACCEPTED } }),
                 prisma.order.count({ where: { status: OrderStatus.COMPLETED } }),
                 prisma.order.count({ where: { status: OrderStatus.CANCELLED } }), // Updated line
                 prisma.order.count({ where: { status: OrderStatus.REFUNDED } }),
