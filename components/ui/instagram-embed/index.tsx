@@ -27,6 +27,7 @@ const InstagramEmbed: React.FC<InstagramEmbedProps> = ({ postUrl }) => {
                 const script = document.createElement('script');
                 script.src = '//www.instagram.com/embed.js';
                 script.async = true;
+                script.onload = () => window.instgrm?.Embeds.process(); // Ensure processing after script load
                 document.body.appendChild(script);
             }
         };
@@ -37,7 +38,7 @@ const InstagramEmbed: React.FC<InstagramEmbedProps> = ({ postUrl }) => {
     return (
         <div ref={containerRef} className="instagram-embed-container">
             <blockquote
-                className="instagram-media bg-white border-0 rounded-md shadow-md m-1 max-w-[540px] min-w-[326px] p-0 w-[calc(100%-2px)]"
+                className="instagram-media bg-white border-0 rounded-md shadow-md m-1 max-w-full min-w-[326px] p-0 w-full"
                 data-instgrm-permalink={postUrl}
                 data-instgrm-version="14"
             >
@@ -61,7 +62,7 @@ const InstagramEmbed: React.FC<InstagramEmbedProps> = ({ postUrl }) => {
                                 className="w-12 h-12"
                                 viewBox="0 0 60 60"
                                 version="1.1"
-                                xmlns="https://www.w3.org/2000/svg"
+                                xmlns="http://www.w3.org/2000/svg"
                                 xmlnsXlink="https://www.w3.org/1999/xlink"
                             >
                                 <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
