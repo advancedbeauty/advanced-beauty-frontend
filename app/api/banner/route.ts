@@ -66,19 +66,19 @@ export async function POST(request: NextRequest) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
         const filename = `banner-${uniqueSuffix}${getExtension(file.name)}`;
-        
+
         const filepath = join(process.cwd(), 'public', 'bannerImages', filename);
         await writeFile(filepath, buffer);
 
         const imagePath = `/bannerImages/${filename}`;
-        
+
         // Get current slides
         const currentSlides = await getCurrentSlides();
         const newSlide: SlideImage = {
             src: imagePath,
-            alt: alt || `Banner ${currentSlides.length + 1}`
+            alt: alt || `Banner ${currentSlides.length + 1}`,
         };
 
         // Add new slide to the beginning of the array
@@ -87,13 +87,16 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({
             success: true,
-            slide: newSlide
+            slide: newSlide,
         });
     } catch (error: unknown) {
         console.error('Upload error:', error);
-        return NextResponse.json({ 
-            error: error instanceof Error ? error.message : 'Error uploading file' 
-        }, { status: 500 });
+        return NextResponse.json(
+            {
+                error: error instanceof Error ? error.message : 'Error uploading file',
+            },
+            { status: 500 }
+        );
     }
 }
 

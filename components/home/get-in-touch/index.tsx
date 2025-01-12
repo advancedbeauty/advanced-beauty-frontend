@@ -13,7 +13,7 @@ const HomeGetInTouch = () => {
         >
             <Container className="w-full relative flex items-center">
                 <Image
-                    src={'/section-images/getintouchSection/getInTouch.jpg'}
+                    src={'/section-images/getintouchSection/home.jpg'}
                     alt="Get in touch"
                     width={1000000}
                     height={1000000}
